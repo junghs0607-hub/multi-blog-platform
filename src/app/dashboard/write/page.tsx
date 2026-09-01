@@ -712,6 +712,7 @@ export default function WritePage() {
             <ExternalPublishPanel articleId={savedArticleId} />
             {!savedArticleId && (
               <button
+                type="button"
                 onClick={() => handleSave("published", { stay: true })}
                 disabled={saving}
                 className="w-full rounded-xl border border-dashed border-gray-300 py-2.5 text-xs font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50"
@@ -735,8 +736,8 @@ export default function WritePage() {
           {/* Buttons */}
           <div className="flex gap-3 justify-end pb-8">
             <Link href="/dashboard/ai" className="px-6 py-3 rounded-xl border border-purple-200 text-purple-600 font-medium hover:bg-purple-50">🤖 AI 글쓰기</Link>
-            <button onClick={() => handleSave("draft")} disabled={saving} className="px-6 py-3 rounded-xl border border-gray-200 font-medium hover:bg-gray-50 disabled:opacity-50">임시저장</button>
-            <button onClick={() => handleSave(status === "draft" ? "published" : status)} disabled={saving} className="px-6 py-3 rounded-xl bg-green-500 text-white font-medium hover:bg-green-600 disabled:opacity-50 shadow-lg shadow-green-500/20">{saving ? "저장 중..." : status === "published" ? "발행하기" : status === "scheduled" ? "예약 발행" : status === "private" ? "비공개 저장" : "발행하기"}</button>
+            <button type="button" onClick={() => handleSave("draft")} disabled={saving} className="px-6 py-3 rounded-xl border border-gray-200 font-medium hover:bg-gray-50 disabled:opacity-50">임시저장</button>
+            <button type="button" onClick={() => handleSave(status === "draft" ? "published" : status)} disabled={saving} className="px-6 py-3 rounded-xl bg-green-500 text-white font-medium hover:bg-green-600 disabled:opacity-50 shadow-lg shadow-green-500/20">{saving ? "저장 중..." : status === "published" ? "발행하기" : status === "scheduled" ? "예약 발행" : status === "private" ? "비공개 저장" : "발행하기"}</button>
           </div>
         </>
       )}

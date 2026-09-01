@@ -91,7 +91,8 @@ export function ExternalPublishPanel({ articleId }: { articleId: number | null }
     );
   };
 
-  const submit = async () => {
+  const submit = async (e?: React.MouseEvent) => {
+    e?.preventDefault();
     if (!articleId) {
       setNotice("게시글을 먼저 저장한 뒤 외부 발행을 요청하세요.");
       return;
@@ -158,7 +159,7 @@ export function ExternalPublishPanel({ articleId }: { articleId: number | null }
 
   return (
     <div className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
-      <button onClick={() => setOpen(!open)} className="font-bold text-sm flex items-center gap-2 w-full text-left">
+      <button type="button" onClick={() => setOpen(!open)} className="font-bold text-sm flex items-center gap-2 w-full text-left">
         🌐 외부 플랫폼 발행
         <span className="text-gray-400 text-xs">{open ? "▲" : "▼"}</span>
         {states.length > 0 && (
@@ -263,6 +264,7 @@ export function ExternalPublishPanel({ articleId }: { articleId: number | null }
           </div>
 
           <button
+            type="button"
             onClick={submit}
             disabled={busy || !articleId}
             className="w-full rounded-xl bg-gray-900 py-3 text-sm font-bold text-white transition-all hover:bg-gray-800 disabled:opacity-50"
@@ -303,6 +305,7 @@ export function ExternalPublishPanel({ articleId }: { articleId: number | null }
                       )}
                       {(state.status === "FAILED" || state.status === "CANCELLED") && (
                         <button
+                          type="button"
                           onClick={() => retry(state.id)}
                           disabled={busy}
                           className="rounded-lg bg-gray-100 px-2.5 py-1 text-xs font-medium hover:bg-gray-200 disabled:opacity-50"
@@ -312,6 +315,7 @@ export function ExternalPublishPanel({ articleId }: { articleId: number | null }
                       )}
                       {(state.status === "SCHEDULED" || state.status === "PENDING") && (
                         <button
+                          type="button"
                           onClick={() => cancel(state.id)}
                           disabled={busy}
                           className="rounded-lg bg-red-50 px-2.5 py-1 text-xs font-medium text-red-600 hover:bg-red-100 disabled:opacity-50"

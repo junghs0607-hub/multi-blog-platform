@@ -67,7 +67,8 @@ export function PublishAccountManager() {
     load();
   }, []);
 
-  const addAccount = async () => {
+  const addAccount = async (e?: React.MouseEvent) => {
+    e?.preventDefault();
     if (!form.blogAddress.trim()) {
       setNotice(`${PLATFORM_INFO[form.platform].addressLabel}을(를) 입력하세요.`);
       return;
@@ -92,7 +93,8 @@ export function PublishAccountManager() {
     }
   };
 
-  const runSession = async (accountId: number, action: "test" | "login") => {
+  const runSession = async (accountId: number, action: "test" | "login", e?: React.MouseEvent) => {
+    e?.preventDefault();
     setBusyId(accountId);
     setNotice(action === "login" ? "브라우저 창에서 로그인을 완료하세요. (최대 3분 대기)" : "세션을 확인하는 중입니다...");
     try {
@@ -165,20 +167,23 @@ export function PublishAccountManager() {
 
                 <div className="mt-3 flex flex-wrap items-center gap-2">
                   <button
-                    onClick={() => runSession(account.id, "test")}
+                    type="button"
+                    onClick={(e) => runSession(account.id, "test", e)}
                     disabled={busyId !== null}
                     className="rounded-lg bg-gray-100 px-3 py-1.5 text-xs font-medium hover:bg-gray-200 disabled:opacity-50"
                   >
                     {busyId === account.id ? "확인 중..." : "세션 테스트"}
                   </button>
                   <button
-                    onClick={() => runSession(account.id, "login")}
+                    type="button"
+                    onClick={(e) => runSession(account.id, "login", e)}
                     disabled={busyId !== null}
                     className="rounded-lg bg-blue-500 px-3 py-1.5 text-xs font-medium text-white hover:bg-blue-600 disabled:opacity-50"
                   >
                     로그인 갱신
                   </button>
                   <button
+                    type="button"
                     onClick={() => removeAccount(account.id)}
                     disabled={busyId !== null}
                     className="rounded-lg px-3 py-1.5 text-xs font-medium text-red-500 hover:bg-red-50 disabled:opacity-50"
@@ -253,6 +258,7 @@ export function PublishAccountManager() {
         </p>
 
         <button
+          type="button"
           onClick={addAccount}
           disabled={busyId !== null}
           className="mt-4 rounded-xl bg-green-500 px-5 py-3 text-sm font-medium text-white hover:bg-green-600 disabled:opacity-50"
