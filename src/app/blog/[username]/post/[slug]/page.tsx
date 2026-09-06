@@ -24,10 +24,13 @@ export async function generateMetadata({ params }: { params: Promise<{ username:
   }).from(articles).where(and(eq(articles.blogId, blog.id), eq(articles.slug, slug))).limit(1);
 
   if (!article) return {};
+  
+  const ts = (blog.themeSettings as any) || {};
 
   return {
     title: (article.seoTitle || article.title) + ` - ${username}`,
     description: article.seoDescription || article.excerpt || "",
+    verification: ts.googleSiteVerification ? { google: ts.googleSiteVerification } : undefined,
     openGraph: {
       title: article.seoTitle || article.title,
       description: article.seoDescription || article.excerpt || "",

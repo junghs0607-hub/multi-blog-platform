@@ -296,6 +296,86 @@ export default function SettingsPage() {
         </div>
       </div>
 
+      {/* SEO & Search Engine Registration */}
+      <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm space-y-4">
+        <div className="flex items-center gap-2 mb-2">
+          <span className="text-xl">🔍</span>
+          <h3 className="font-bold text-lg">SEO 및 구글 서치콘솔</h3>
+        </div>
+        <p className="text-sm text-gray-500 mb-4">
+          구글 검색 결과에 내 블로그가 잘 노출되도록 서치콘솔에 사이트맵과 RSS를 제출하세요.
+        </p>
+
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Google 사이트 소유권 확인 태그 (Verification)</label>
+            <input 
+              type="text" 
+              value={ts.googleSiteVerification || ""}
+              onChange={(e) => setBlog({ ...blog, themeSettings: { ...ts, googleSiteVerification: e.target.value } })}
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-green-500 outline-none" 
+              placeholder="예: x_xxxxxxxxxxxxxxxx"
+            />
+            <p className="mt-1 text-xs text-gray-500">서치콘솔에서 제공하는 HTML 태그 중 content="..." 안의 값을 입력하세요.</p>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Sitemap URL</label>
+            <div className="flex gap-2">
+              <input 
+                type="text" 
+                readOnly
+                value={`${typeof window !== 'undefined' ? window.location.origin : ''}/sitemap.xml`}
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm text-gray-500 outline-none" 
+              />
+              <button 
+                type="button"
+                onClick={() => {
+                  navigator.clipboard.writeText(`${window.location.origin}/sitemap.xml`);
+                  alert("복사되었습니다.");
+                }}
+                className="px-4 py-2 bg-gray-100 text-gray-700 rounded-xl text-sm font-medium hover:bg-gray-200 whitespace-nowrap"
+              >
+                복사
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">RSS Feed URL</label>
+            <div className="flex gap-2">
+              <input 
+                type="text" 
+                readOnly
+                value={`${typeof window !== 'undefined' ? window.location.origin : ''}/api/rss/${blog?.slug || ''}`}
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm text-gray-500 outline-none" 
+              />
+              <button 
+                type="button"
+                onClick={() => {
+                  navigator.clipboard.writeText(`${window.location.origin}/api/rss/${blog?.slug || ''}`);
+                  alert("복사되었습니다.");
+                }}
+                className="px-4 py-2 bg-gray-100 text-gray-700 rounded-xl text-sm font-medium hover:bg-gray-200 whitespace-nowrap"
+              >
+                복사
+              </button>
+            </div>
+          </div>
+          
+          <div className="pt-2">
+            <a 
+              href="https://search.google.com/search-console" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm text-blue-600 hover:text-blue-800 font-medium"
+            >
+              구글 서치콘솔 바로가기 ↗
+            </a>
+          </div>
+        </div>
+      </div>
+
       <button 
         onClick={handleSave} 
         disabled={saving}

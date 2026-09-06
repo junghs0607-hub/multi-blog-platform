@@ -11,13 +11,17 @@ export const dynamic = "force-dynamic";
 export async function generateMetadata({ params }: { params: Promise<{ username: string }> }) {
   const { username } = await params;
   try {
-    const [blog] = await db.select({ name: blogs.name, description: blogs.description })
+    const [blog] = await db.select({ name: blogs.name, description: blogs.description, themeSettings: blogs.themeSettings })
       .from(blogs).where(eq(blogs.slug, username)).limit(1);
     if (!blog) return { title: "블로그를 찾을 수 없습니다" };
+    
+    const ts = (blog.themeSettings as any) || {};
+    
     return {
       title: blog.name + " - BlogHub",
       description: blog.description || "",
       openGraph: { title: blog.name, description: blog.description || "" },
+      verification: ts.googleSiteVerification ? { google: ts.googleSiteVerification } : undefined,
     };
   } catch {
     return { title: "BlogHub" };
