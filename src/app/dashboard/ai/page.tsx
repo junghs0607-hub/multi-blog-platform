@@ -51,9 +51,9 @@ export default function AIWritePage() {
       setTokensUsed(d.tokensUsed || 0);
 
       // Handle structured response for "write" type
-      if (d.parsed && type === "write") {
+      if (d.parsed && (type === "write" || type === "youtube")) {
         setParsedResult(d.parsed);
-      } else if (type === "write") {
+      } else if (type === "write" || type === "youtube") {
         // Try to parse JSON from raw result
         try {
           let jsonStr = d.result;
@@ -135,6 +135,7 @@ export default function AIWritePage() {
           <div className="flex flex-wrap gap-2">
             {[
               { v: "write", l: "✨ 글 작성", desc: "전체 블로그 글 생성" },
+              { v: "youtube", l: "📺 유튜브 글쓰기", desc: "유튜브 요약 및 블로그 작성" },
               { v: "title", l: "💡 제목 추천", desc: "제목 5개 추천" },
               { v: "summary", l: "📋 요약", desc: "글 요약" },
               { v: "improve", l: "✍️ 문장 개선", desc: "문장 다듬기" },
@@ -152,13 +153,14 @@ export default function AIWritePage() {
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            {type === "write" ? "블로그 글 주제" : type === "title" ? "제목을 만들 주제/내용" : type === "tags" ? "태그를 생성할 내용" : "처리할 내용"}
+            {type === "write" ? "블로그 글 주제" : type === "youtube" ? "유튜브 영상 링크 (URL)" : type === "title" ? "제목을 만들 주제/내용" : type === "tags" ? "태그를 생성할 내용" : "처리할 내용"}
           </label>
           <textarea
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             placeholder={
               type === "write" ? "예: 서울 홍대 카페 추천 TOP 5, 맛있는 커피와 분위기 좋은 곳 위주로" 
+              : type === "youtube" ? "예: https://www.youtube.com/watch?v=..." 
               : type === "title" ? "제목을 만들 주제나 내용을 입력하세요"
               : "내용을 입력하세요..."
             }
@@ -166,7 +168,7 @@ export default function AIWritePage() {
           />
         </div>
 
-        {type === "write" && (
+        {(type === "write" || type === "youtube") && (
           <label className="flex items-center gap-2 cursor-pointer">
             <input 
               type="checkbox" 
@@ -193,7 +195,7 @@ export default function AIWritePage() {
       </div>
 
       {/* Parsed Result - Structured View */}
-      {parsedResult && type === "write" && (
+      {parsedResult && (type === "write" || type === "youtube") && (
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
           <div className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-4 flex items-center justify-between">
             <div>
@@ -379,7 +381,7 @@ export default function AIWritePage() {
       )}
 
       {/* Fallback raw result */}
-      {result && !parsedResult && type === "write" && (
+      {result && !parsedResult && (type === "write" || type === "youtube") && (
         <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
           <div className="flex items-center justify-between mb-4">
             <h3 className="font-bold">생성 결과 (원본)</h3>

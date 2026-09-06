@@ -3,6 +3,7 @@ import { db } from "@/db";
 import { aiSettings, aiLogs } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { getCurrentUser } from "@/lib/auth";
+import { YoutubeTranscript } from "youtube-transcript";
 import {
   acquireBlogImages,
   injectImagesIntoContent,
@@ -54,6 +55,8 @@ export async function POST(req: NextRequest) {
     }
 
     let userPrompt = "";
+    let extractedTopic = String(prompt || "");
+
     switch (type) {
       case "write": {
         const imageField = includeImages !== false
@@ -82,6 +85,48 @@ export async function POST(req: NextRequest) {
 - 최소 800자 이상 작성하세요.
 - h2, h3, p, strong, ul, li, blockquote 태그를 활용하세요.
 - 소제목과 문단을 명확하게 구분하세요.
+- content 안에 img 태그나 존재하지 않는 이미지 URL을 절대 만들지 마세요.
+${includeImages !== false ? `- imageQueries는 본문의 서로 다른 장면을 표현하는 ${imageCount}개의 구체적인 영문 사진 검색어로 작성하세요.` : ""}
+- 이미지 파일 확보와 본문 배치는 서버가 별도로 처리합니다.`;
+        break;
+      }
+      case "youtube": {
+        const url = String(prompt).trim();
+        let transcriptText = "";
+        try {
+          const transcript = await YoutubeTranscript.fetchTranscript(url);
+          transcriptText = transcript.map(t => t.text).join(" ");
+        } catch (e) {
+          return NextResponse.json({ error: "유튜브 자막을 추출할 수 없습니다. 영상에 자막이 없거나 URL이 잘못되었을 수 있습니다." }, { status: 400 });
+        }
+        
+        extractedTopic = "유튜브 영상 요약 및 분석";
+        const imageField = includeImages !== false
+          ? `,
+  "imageQueries": [
+    {"query":"영문 이미지 검색어 1","alt":"한국어 대체 텍스트","caption":"한국어 캡션"}
+  ]`
+          : "";
+        
+        userPrompt = `다음은 유튜브 영상의 자막 내용입니다. 이 내용을 바탕으로 독자들이 흥미를 가질 만한 매력적인 한국어 블로그 글을 작성해주세요.
+
+자막 내용: ${transcriptText.substring(0, 7000)}
+
+반드시 다른 설명이나 마크다운 코드펜스 없이 아래 JSON 형식만 응답하세요.
+{
+  "title": "매력적인 제목",
+  "subtitle": "부제목",
+  "summary": "2-3문장의 요약",
+  "content": "HTML 형식의 본문",
+  "seoTitle": "SEO 제목 (60자 이내)",
+  "seoDescription": "SEO 설명 (160자 이내)",
+  "tags": ["태그1", "태그2", "태그3", "태그4", "태그5"]${imageField}
+}
+
+본문 작성 규칙:
+- 최소 800자 이상 작성하세요.
+- 단순히 자막을 나열하지 말고, 서론-본론-결론이 있는 블로그 포스팅 형식으로 재구성하세요.
+- h2, h3, p, strong, ul, li, blockquote 태그를 적극적으로 활용하세요.
 - content 안에 img 태그나 존재하지 않는 이미지 URL을 절대 만들지 마세요.
 ${includeImages !== false ? `- imageQueries는 본문의 서로 다른 장면을 표현하는 ${imageCount}개의 구체적인 영문 사진 검색어로 작성하세요.` : ""}
 - 이미지 파일 확보와 본문 배치는 서버가 별도로 처리합니다.`;
@@ -146,7 +191,7 @@ ${includeImages !== false ? `- imageQueries는 본문의 서로 다른 장면을
       tokensUsed,
     });
 
-    if (type !== "write") {
+    if (type !== "write" && type !== "youtube") {
       return NextResponse.json({ success: true, result: resultText, tokensUsed });
     }
 
@@ -156,10 +201,10 @@ ${includeImages !== false ? `- imageQueries는 본문의 서로 다른 장면을
       let imageWarnings: string[] = [];
 
       if (includeImages !== false) {
-        const queries = normalizeImageQueries(parsed.imageQueries, String(prompt), imageCount);
+        const queries = normalizeImageQueries(parsed.imageQueries, extractedTopic, imageCount);
         const imageResult = await acquireBlogImages({
           userId: user.id,
-          topic: String(prompt),
+          topic: extractedTopic,
           queries,
           settings: {
             imageProvider: settings?.imageProvider,
