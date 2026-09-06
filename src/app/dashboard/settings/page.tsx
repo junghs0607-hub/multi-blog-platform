@@ -17,6 +17,7 @@ export default function SettingsPage() {
   const [saving, setSaving] = useState(false);
   const [uploadingProfile, setUploadingProfile] = useState(false);
   const [uploadingCover, setUploadingCover] = useState(false);
+  const [uploadingBackground, setUploadingBackground] = useState(false);
 
   useEffect(() => {
     fetch("/api/blog/settings").then(r => r.json()).then(d => {
@@ -40,9 +41,10 @@ export default function SettingsPage() {
     finally { setSaving(false); }
   };
 
-  const uploadImage = async (file: File, type: 'profile' | 'cover') => {
+  const uploadImage = async (file: File, type: 'profile' | 'cover' | 'background') => {
     if (type === 'profile') setUploadingProfile(true);
-    else setUploadingCover(true);
+    else if (type === 'cover') setUploadingCover(true);
+    else setUploadingBackground(true);
 
     const formData = new FormData();
     formData.append('file', file);
@@ -53,8 +55,10 @@ export default function SettingsPage() {
       if (data.url) {
         if (type === 'profile') {
           setBlog({ ...blog, profileImage: data.url });
-        } else {
+        } else if (type === 'cover') {
           setBlog({ ...blog, coverImage: data.url });
+        } else {
+          setBlog({ ...blog, themeSettings: { ...(blog.themeSettings || {}), backgroundImage: data.url } });
         }
       } else if (data.error) {
         alert(data.error);
@@ -63,11 +67,12 @@ export default function SettingsPage() {
       alert('업로드 실패');
     } finally {
       if (type === 'profile') setUploadingProfile(false);
-      else setUploadingCover(false);
+      else if (type === 'cover') setUploadingCover(false);
+      else setUploadingBackground(false);
     }
   };
 
-  const handleFileSelect = (type: 'profile' | 'cover') => {
+  const handleFileSelect = (type: 'profile' | 'cover' | 'background') => {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*';
@@ -228,6 +233,54 @@ export default function SettingsPage() {
               </button>
             </div>
           </div>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">상단 커버 (백그라운드) 이미지</label>
+          <div className="flex gap-2 items-center">
+            <button
+              type="button"
+              onClick={() => handleFileSelect('cover')}
+              className="px-4 py-2 bg-gray-100 text-gray-700 rounded-xl text-sm font-medium hover:bg-gray-200"
+            >
+              {uploadingCover ? "업로드 중..." : "📷 상단 이미지 업로드"}
+            </button>
+            {blog?.coverImage && (
+              <button
+                type="button"
+                onClick={() => setBlog({ ...blog, coverImage: '' })}
+                className="px-4 py-2 bg-red-50 text-red-600 rounded-xl text-sm font-medium hover:bg-red-100"
+              >
+                초기화
+              </button>
+            )}
+            {blog?.coverImage && <span className="text-xs text-green-600 ml-2">✓ 등록됨</span>}
+          </div>
+          <p className="mt-1 text-xs text-gray-500">블로그 상단 영역에 표시될 백그라운드 이미지를 등록합니다.</p>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">블로그 전체 배경 이미지</label>
+          <div className="flex gap-2 items-center">
+            <button
+              type="button"
+              onClick={() => handleFileSelect('background')}
+              className="px-4 py-2 bg-gray-100 text-gray-700 rounded-xl text-sm font-medium hover:bg-gray-200"
+            >
+              {uploadingBackground ? "업로드 중..." : "🖼️ 전체 배경 업로드"}
+            </button>
+            {ts.backgroundImage && (
+              <button
+                type="button"
+                onClick={() => setBlog({ ...blog, themeSettings: { ...ts, backgroundImage: '' } })}
+                className="px-4 py-2 bg-red-50 text-red-600 rounded-xl text-sm font-medium hover:bg-red-100"
+              >
+                삭제
+              </button>
+            )}
+            {ts.backgroundImage && <span className="text-xs text-green-600 ml-2">✓ 등록됨</span>}
+          </div>
+          <p className="mt-1 text-xs text-gray-500">블로그 전체 바탕에 깔리는 이미지를 등록합니다.</p>
         </div>
 
         <div>

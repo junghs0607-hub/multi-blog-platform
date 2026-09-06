@@ -87,7 +87,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ userna
   const primaryColor = ts.primaryColor || "#03c75a";
 
   return (
-    <div className={`min-h-screen ${isDark ? "bg-gray-900 text-gray-100" : "bg-gray-50"}`}>
+    <div 
+      className={`min-h-screen ${isDark ? "bg-gray-900 text-gray-100" : "bg-gray-50"}`}
+      style={ts.backgroundImage ? { backgroundImage: `url(${ts.backgroundImage})`, backgroundSize: 'cover', backgroundAttachment: 'fixed', backgroundPosition: 'center' } : {}}
+    >
       {/* Nav */}
       <nav className={`${isDark ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"} border-b sticky top-0 z-50`}>
         <div className="max-w-4xl mx-auto px-4 h-14 flex items-center justify-between">
