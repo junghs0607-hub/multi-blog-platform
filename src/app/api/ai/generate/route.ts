@@ -26,6 +26,8 @@ function extractJson(raw: string): unknown {
   }
 }
 
+export const maxDuration = 60;
+
 export async function POST(req: NextRequest) {
   const user = await getCurrentUser();
   if (!user) return NextResponse.json({ error: "로그인이 필요합니다." }, { status: 401 });
@@ -42,7 +44,10 @@ export async function POST(req: NextRequest) {
     const baseUrl = (settings?.apiBaseUrl || "https://api.openai.com/v1").replace(/\/$/, "");
     const model = settings?.model || "gpt-3.5-turbo";
     const temperature = (settings?.temperature ?? 7) / 10;
-    const maxTokens = settings?.maxTokens || 2000;
+    let maxTokens = settings?.maxTokens || 4000;
+    if ((type === "write" || type === "youtube") && maxTokens < 4000) {
+      maxTokens = 4000;
+    }
     const imageCount = Math.max(1, Math.min(settings?.imageCount || 3, 5));
     const systemPrompt = settings?.systemPrompt ||
       "당신은 한국어 블로그 글 작성을 돕는 전문 AI 어시스턴트입니다. 매력적이고 읽기 쉬운 글을 작성합니다.";
