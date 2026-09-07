@@ -3,7 +3,7 @@ import { db } from "@/db";
 import { aiSettings, aiLogs } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { getCurrentUser } from "@/lib/auth";
-import { YoutubeTranscript } from "youtube-transcript";
+import { YoutubeTranscript } from "@/lib/youtube-transcript";
 import {
   acquireBlogImages,
   injectImagesIntoContent,
