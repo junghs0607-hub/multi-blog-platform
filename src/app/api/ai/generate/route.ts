@@ -70,7 +70,13 @@ export async function POST(req: NextRequest) {
 
 주제: ${prompt}
 
-반드시 다른 설명이나 마크다운 코드펜스 없이 아래 JSON 형식만 응답하세요.
+[중요: JSON 형식 및 문법 규칙]
+- 다른 설명이나 마크다운 코드펜스(```) 없이 순수한 JSON 객체만 응답하세요.
+- 모든 키(Key)와 문자열 값(Value)은 큰따옴표(")로 감싸야 합니다.
+- HTML content 안에 들어가는 속성의 큰따옴표(예: <p class="text">)는 반드시 백슬래시(\\)로 이스케이프(\\") 처리하세요.
+- JSON 문자열 값 내부에 실제 줄바꿈(엔터)을 넣지 마세요. 줄바꿈이 필요하면 반드시 "\\n" 문자를 사용하세요.
+
+응답할 JSON 구조:
 {
   "title": "매력적인 제목",
   "subtitle": "부제목",
@@ -81,7 +87,7 @@ export async function POST(req: NextRequest) {
   "tags": ["태그1", "태그2", "태그3", "태그4", "태그5"]${imageField}
 }
 
-본문 작성 규칙:
+본문(content) 작성 규칙:
 - 최소 800자 이상 작성하세요.
 - h2, h3, p, strong, ul, li, blockquote 태그를 활용하세요.
 - 소제목과 문단을 명확하게 구분하세요.
@@ -112,7 +118,13 @@ ${includeImages !== false ? `- imageQueries는 본문의 서로 다른 장면을
 
 자막 내용: ${transcriptText.substring(0, 7000)}
 
-반드시 다른 설명이나 마크다운 코드펜스 없이 아래 JSON 형식만 응답하세요.
+[중요: JSON 형식 및 문법 규칙]
+- 다른 설명이나 마크다운 코드펜스(```) 없이 순수한 JSON 객체만 응답하세요.
+- 모든 키(Key)와 문자열 값(Value)은 큰따옴표(")로 감싸야 합니다.
+- HTML content 안에 들어가는 속성의 큰따옴표(예: <a href="url">)는 반드시 백슬래시(\\)로 이스케이프(\\") 처리하세요.
+- JSON 문자열 값 내부에 실제 줄바꿈(엔터)을 넣지 마세요. 줄바꿈이 필요하면 반드시 "\\n" 문자를 사용하세요.
+
+응답할 JSON 구조:
 {
   "title": "매력적인 제목",
   "subtitle": "부제목",
@@ -123,7 +135,7 @@ ${includeImages !== false ? `- imageQueries는 본문의 서로 다른 장면을
   "tags": ["태그1", "태그2", "태그3", "태그4", "태그5"]${imageField}
 }
 
-본문 작성 규칙:
+본문(content) 작성 규칙:
 - 최소 800자 이상 작성하세요.
 - 단순히 자막을 나열하지 말고, 서론-본론-결론이 있는 블로그 포스팅 형식으로 재구성하세요.
 - h2, h3, p, strong, ul, li, blockquote 태그를 적극적으로 활용하세요.
@@ -151,6 +163,20 @@ ${includeImages !== false ? `- imageQueries는 본문의 서로 다른 장면을
         userPrompt = prompt || content;
     }
 
+    const requestBody: any = {
+      model,
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: userPrompt },
+      ],
+      temperature,
+      max_tokens: maxTokens,
+    };
+
+    if (provider === "openai" && (type === "write" || type === "youtube" || type === "seo")) {
+      requestBody.response_format = { type: "json_object" };
+    }
+
     const apiResponse = await fetch(`${baseUrl}/chat/completions`, {
       method: "POST",
       signal: AbortSignal.timeout(120_000),
@@ -158,15 +184,7 @@ ${includeImages !== false ? `- imageQueries는 본문의 서로 다른 장면을
         "Content-Type": "application/json",
         Authorization: `Bearer ${apiKey}`,
       },
-      body: JSON.stringify({
-        model,
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: userPrompt },
-        ],
-        temperature,
-        max_tokens: maxTokens,
-      }),
+      body: JSON.stringify(requestBody),
     });
 
     if (!apiResponse.ok) {
