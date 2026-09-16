@@ -8,7 +8,10 @@
  *
  * Playwright only ever runs here, never inside the Next.js server.
  */
-import "dotenv/config";
+import { loadEnvConfig } from "@next/env";
+const projectDir = process.cwd();
+loadEnvConfig(projectDir);
+
 import { eq } from "drizzle-orm";
 import { db } from "../src/db";
 import { publishAccounts } from "../src/db/schema";
