@@ -78,7 +78,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ userna
   // Record page view (IP & User-Agent)
   try {
     const headersList = await headers();
-    const ip = headersList.get("x-forwarded-for") || headersList.get("x-real-ip") || "unknown";
+    const rawIp = headersList.get("x-forwarded-for") || headersList.get("x-real-ip") || "unknown";
+    const ip = rawIp.split(",")[0].trim().replace(/^::ffff:/, "").replace(/^::1$/, "127.0.0.1");
     const userAgent = headersList.get("user-agent") || "";
     const referer = headersList.get("referer") || "";
 
