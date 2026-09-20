@@ -72,24 +72,29 @@ export default async function ArticlePage({ params }: { params: Promise<{ userna
 
   if (!article || (article.status !== "published")) notFound();
 
-  // Update view count
-  await db.update(articles).set({ viewCount: (article.viewCount || 0) + 1 }).where(eq(articles.id, article.id));
-
-  // Record page view (IP & User-Agent)
   try {
     const headersList = await headers();
-    const rawIp = headersList.get("x-forwarded-for") || headersList.get("x-real-ip") || "unknown";
-    const ip = rawIp.split(",")[0].trim().replace(/^::ffff:/, "").replace(/^::1$/, "127.0.0.1");
+    const isPrefetch = headersList.get("next-router-prefetch") === "1" || headersList.get("purpose") === "prefetch";
     const userAgent = headersList.get("user-agent") || "";
-    const referer = headersList.get("referer") || "";
+    const isBot = /bot|crawler|spider|crawling|googlebot|bingbot|yandex|baiduspider|facebookexternalhit|twitterbot|rogerbot|linkedinbot|embedly|quora link preview|showyoubot|outbrain|pinterest|slackbot|vkShare|W3C_Validator|whatsapp/i.test(userAgent);
 
-    await db.insert(pageViews).values({
-      blogId: blog.id,
-      articleId: article.id,
-      ip,
-      userAgent,
-      referer,
-    });
+    if (!isPrefetch && !isBot) {
+      // Update view count
+      await db.update(articles).set({ viewCount: (article.viewCount || 0) + 1 }).where(eq(articles.id, article.id));
+
+      // Record page view (IP & User-Agent)
+      const rawIp = headersList.get("x-forwarded-for") || headersList.get("x-real-ip") || "unknown";
+      const ip = rawIp.split(",")[0].trim().replace(/^::ffff:/, "").replace(/^::1$/, "127.0.0.1");
+      const referer = headersList.get("referer") || "";
+
+      await db.insert(pageViews).values({
+        blogId: blog.id,
+        articleId: article.id,
+        ip,
+        userAgent,
+        referer,
+      });
+    }
   } catch (error) {
     // Ignore error if recording fails
   }
