@@ -43,7 +43,7 @@ export default function VisitorsPage() {
                 {logs.map((log) => (
                   <tr key={log.id} className="hover:bg-gray-50">
                     <td className="px-4 py-3 whitespace-nowrap text-xs text-gray-500">
-                      {new Date(log.createdAt).toLocaleString("ko-KR")}
+                      {new Date(log.createdAt).toLocaleString("ko-KR", { timeZone: "Asia/Seoul" })}
                     </td>
                     <td className="px-4 py-3 font-mono text-xs text-gray-700">
                       {log.ip || "알 수 없음"}
