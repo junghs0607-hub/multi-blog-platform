@@ -67,6 +67,14 @@ export function BlogHeader({ blog, subscriberCount, currentUser }: Props) {
             {currentUser && currentUser.username === blog.ownerUsername && (
               <Link href="/dashboard" className={`text-sm ${isDark ? "text-gray-400" : "text-gray-500"} hover:text-green-600`}>관리</Link>
             )}
+            <Link 
+              href={`/api/rss/${blog.slug}`} 
+              target="_blank"
+              title="RSS 피드"
+              className={`text-sm ${isDark ? "text-gray-400" : "text-gray-500"} hover:text-orange-500`}
+            >
+              RSS
+            </Link>
             <Link href="/" className={`text-sm ${isDark ? "text-gray-400" : "text-gray-500"} hover:text-green-600`}>BlogHub</Link>
           </div>
         </div>

@@ -3,6 +3,7 @@ import { articles, blogs, users, categories, tags, articleTags, pageViews } from
 import { eq, and } from "drizzle-orm";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { headers } from "next/headers";
 import { getCurrentUser } from "@/lib/auth";
 import { ArticleInteractions } from "@/components/ArticleInteractions";
 import { CommentSection } from "@/components/CommentSection";
@@ -73,6 +74,24 @@ export default async function ArticlePage({ params }: { params: Promise<{ userna
 
   // Update view count
   await db.update(articles).set({ viewCount: (article.viewCount || 0) + 1 }).where(eq(articles.id, article.id));
+
+  // Record page view (IP & User-Agent)
+  try {
+    const headersList = await headers();
+    const ip = headersList.get("x-forwarded-for") || headersList.get("x-real-ip") || "unknown";
+    const userAgent = headersList.get("user-agent") || "";
+    const referer = headersList.get("referer") || "";
+
+    await db.insert(pageViews).values({
+      blogId: blog.id,
+      articleId: article.id,
+      ip,
+      userAgent,
+      referer,
+    });
+  } catch (error) {
+    // Ignore error if recording fails
+  }
 
   // Get tags
   const tagList = await db

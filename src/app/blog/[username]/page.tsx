@@ -1,8 +1,9 @@
 import { db } from "@/db";
-import { blogs, users, articles, categories, blogSubscriptions } from "@/db/schema";
+import { blogs, users, articles, categories, blogSubscriptions, pageViews } from "@/db/schema";
 import { eq, and, desc, sql } from "drizzle-orm";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { headers } from "next/headers";
 import { getCurrentUser } from "@/lib/auth";
 import { BlogHeader } from "@/components/BlogHeader";
 
@@ -137,6 +138,24 @@ export default async function BlogPage({
 
   // 8. Current user
   const currentUser = await getCurrentUser();
+
+  // 9. Record page view (IP & User-Agent)
+  try {
+    const headersList = await headers();
+    const ip = headersList.get("x-forwarded-for") || headersList.get("x-real-ip") || "unknown";
+    const userAgent = headersList.get("user-agent") || "";
+    const referer = headersList.get("referer") || "";
+
+    await db.insert(pageViews).values({
+      blogId: blog.id,
+      ip,
+      userAgent,
+      referer,
+    });
+  } catch (error) {
+    // Ignore error if recording fails
+  }
+
   const ts = (blog.themeSettings || {}) as any;
   const isDark = blog.theme === "dark" || ts.darkMode;
   const primaryColor = ts.primaryColor || "#03c75a";
