@@ -71,7 +71,7 @@ export function AdminPanel({ user, counts }: Props) {
         {/* Tabs */}
         <div className="flex gap-2 mb-6 overflow-x-auto">
           {tabs.map(t => (
-            <button key={t.id} onClick={() => setTab(t.id)}
+            <button type="button" key={t.id} onClick={() => setTab(t.id)}
               className={`px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-all ${
                 tab === t.id ? "bg-gray-900 text-white" : "bg-white text-gray-600 hover:bg-gray-100 border border-gray-200"
               }`}>
@@ -145,7 +145,7 @@ export function AdminPanel({ user, counts }: Props) {
                             {new Date(u.createdAt).toLocaleDateString("ko-KR")}
                           </td>
                           <td className="px-4 py-3">
-                            <button onClick={() => toggleUserActive(u.id, !u.isActive)}
+                            <button type="button" onClick={() => toggleUserActive(u.id, !u.isActive)}
                               className={`text-xs px-2 py-1 rounded ${u.isActive ? "text-red-600 hover:bg-red-50" : "text-green-600 hover:bg-green-50"}`}>
                               {u.isActive ? "비활성화" : "활성화"}
                             </button>
@@ -177,7 +177,7 @@ export function AdminPanel({ user, counts }: Props) {
                 <label className="block text-sm font-medium text-gray-700 mb-2">사이트 설명</label>
                 <textarea defaultValue="프리미엄 멀티 블로그 플랫폼" className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm resize-none h-20" />
               </div>
-              <button className="px-5 py-3 bg-green-500 text-white rounded-xl font-medium hover:bg-green-600 text-sm">
+              <button type="button" className="px-5 py-3 bg-green-500 text-white rounded-xl font-medium hover:bg-green-600 text-sm">
                 💾 저장
               </button>
             </div>

@@ -12,18 +12,15 @@ const PLATFORMS: Platform[] = ["NAVER", "TISTORY"];
 /** Fire-and-forget worker tick. Failure here never affects the API response. */
 function triggerWorkerTick() {
   try {
+    const cmd = process.platform === "win32" ? "npm.cmd" : "npm";
     const child = spawn(
-      process.execPath,
-      [
-        path.join(process.cwd(), "node_modules", "tsx", "dist", "cli.mjs"),
-        path.join(process.cwd(), "scripts", "publisher-worker.ts"),
-        "tick",
-      ],
+      cmd,
+      ["run", "publisher:tick"],
       { cwd: process.cwd(), env: { ...process.env }, detached: true, stdio: "ignore" },
     );
     child.unref();
-  } catch {
-    // The standing worker loop will pick the job up on its next poll.
+  } catch (error) {
+    console.error("Failed to trigger worker tick:", error);
   }
 }
 

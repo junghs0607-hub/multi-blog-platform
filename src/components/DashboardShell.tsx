@@ -14,6 +14,7 @@ const menuItems = [
   { href: "/dashboard/articles", label: "게시글 관리", icon: "📝" },
   { href: "/dashboard/write", label: "새 글쓰기", icon: "✏️" },
   { href: "/dashboard/comments", label: "댓글 관리", icon: "💬" },
+  { href: "/dashboard/visitors", label: "방문자 로그", icon: "🕵️" },
   { href: "/dashboard/categories", label: "카테고리/태그", icon: "📁" },
   { href: "/dashboard/media", label: "미디어", icon: "🖼️" },
   { href: "/dashboard/ai", label: "AI 글쓰기", icon: "🤖" },

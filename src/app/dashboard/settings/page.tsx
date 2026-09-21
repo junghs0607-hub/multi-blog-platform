@@ -17,6 +17,7 @@ export default function SettingsPage() {
   const [saving, setSaving] = useState(false);
   const [uploadingProfile, setUploadingProfile] = useState(false);
   const [uploadingCover, setUploadingCover] = useState(false);
+  const [uploadingBackground, setUploadingBackground] = useState(false);
 
   useEffect(() => {
     fetch("/api/blog/settings").then(r => r.json()).then(d => {
@@ -40,9 +41,10 @@ export default function SettingsPage() {
     finally { setSaving(false); }
   };
 
-  const uploadImage = async (file: File, type: 'profile' | 'cover') => {
+  const uploadImage = async (file: File, type: 'profile' | 'cover' | 'background') => {
     if (type === 'profile') setUploadingProfile(true);
-    else setUploadingCover(true);
+    else if (type === 'cover') setUploadingCover(true);
+    else setUploadingBackground(true);
 
     const formData = new FormData();
     formData.append('file', file);
@@ -53,8 +55,10 @@ export default function SettingsPage() {
       if (data.url) {
         if (type === 'profile') {
           setBlog({ ...blog, profileImage: data.url });
-        } else {
+        } else if (type === 'cover') {
           setBlog({ ...blog, coverImage: data.url });
+        } else {
+          setBlog({ ...blog, themeSettings: { ...(blog.themeSettings || {}), backgroundImage: data.url } });
         }
       } else if (data.error) {
         alert(data.error);
@@ -63,11 +67,12 @@ export default function SettingsPage() {
       alert('업로드 실패');
     } finally {
       if (type === 'profile') setUploadingProfile(false);
-      else setUploadingCover(false);
+      else if (type === 'cover') setUploadingCover(false);
+      else setUploadingBackground(false);
     }
   };
 
-  const handleFileSelect = (type: 'profile' | 'cover') => {
+  const handleFileSelect = (type: 'profile' | 'cover' | 'background') => {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*';
@@ -231,6 +236,54 @@ export default function SettingsPage() {
         </div>
 
         <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">상단 커버 (백그라운드) 이미지</label>
+          <div className="flex gap-2 items-center">
+            <button
+              type="button"
+              onClick={() => handleFileSelect('cover')}
+              className="px-4 py-2 bg-gray-100 text-gray-700 rounded-xl text-sm font-medium hover:bg-gray-200"
+            >
+              {uploadingCover ? "업로드 중..." : "📷 상단 이미지 업로드"}
+            </button>
+            {blog?.coverImage && (
+              <button
+                type="button"
+                onClick={() => setBlog({ ...blog, coverImage: '' })}
+                className="px-4 py-2 bg-red-50 text-red-600 rounded-xl text-sm font-medium hover:bg-red-100"
+              >
+                초기화
+              </button>
+            )}
+            {blog?.coverImage && <span className="text-xs text-green-600 ml-2">✓ 등록됨</span>}
+          </div>
+          <p className="mt-1 text-xs text-gray-500">블로그 상단 영역에 표시될 백그라운드 이미지를 등록합니다.</p>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">블로그 전체 배경 이미지</label>
+          <div className="flex gap-2 items-center">
+            <button
+              type="button"
+              onClick={() => handleFileSelect('background')}
+              className="px-4 py-2 bg-gray-100 text-gray-700 rounded-xl text-sm font-medium hover:bg-gray-200"
+            >
+              {uploadingBackground ? "업로드 중..." : "🖼️ 전체 배경 업로드"}
+            </button>
+            {ts.backgroundImage && (
+              <button
+                type="button"
+                onClick={() => setBlog({ ...blog, themeSettings: { ...ts, backgroundImage: '' } })}
+                className="px-4 py-2 bg-red-50 text-red-600 rounded-xl text-sm font-medium hover:bg-red-100"
+              >
+                삭제
+              </button>
+            )}
+            {ts.backgroundImage && <span className="text-xs text-green-600 ml-2">✓ 등록됨</span>}
+          </div>
+          <p className="mt-1 text-xs text-gray-500">블로그 전체 바탕에 깔리는 이미지를 등록합니다.</p>
+        </div>
+
+        <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">폰트</label>
           <select 
             value={ts.fontFamily || "default"}
@@ -292,6 +345,86 @@ export default function SettingsPage() {
             <p className={`text-xs ${ts.darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
               {blog?.description || '블로그 소개'}
             </p>
+          </div>
+        </div>
+      </div>
+
+      {/* SEO & Search Engine Registration */}
+      <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm space-y-4">
+        <div className="flex items-center gap-2 mb-2">
+          <span className="text-xl">🔍</span>
+          <h3 className="font-bold text-lg">SEO 및 구글 서치콘솔</h3>
+        </div>
+        <p className="text-sm text-gray-500 mb-4">
+          구글 검색 결과에 내 블로그가 잘 노출되도록 서치콘솔에 사이트맵과 RSS를 제출하세요.
+        </p>
+
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Google 사이트 소유권 확인 태그 (Verification)</label>
+            <input 
+              type="text" 
+              value={ts.googleSiteVerification || ""}
+              onChange={(e) => setBlog({ ...blog, themeSettings: { ...ts, googleSiteVerification: e.target.value } })}
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-green-500 outline-none" 
+              placeholder="예: x_xxxxxxxxxxxxxxxx"
+            />
+            <p className="mt-1 text-xs text-gray-500">서치콘솔에서 제공하는 HTML 태그 중 content="..." 안의 값을 입력하세요.</p>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Sitemap URL</label>
+            <div className="flex gap-2">
+              <input 
+                type="text" 
+                readOnly
+                value={`${typeof window !== 'undefined' ? window.location.origin : ''}/sitemap.xml`}
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm text-gray-500 outline-none" 
+              />
+              <button 
+                type="button"
+                onClick={() => {
+                  navigator.clipboard.writeText(`${window.location.origin}/sitemap.xml`);
+                  alert("복사되었습니다.");
+                }}
+                className="px-4 py-2 bg-gray-100 text-gray-700 rounded-xl text-sm font-medium hover:bg-gray-200 whitespace-nowrap"
+              >
+                복사
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">RSS Feed URL</label>
+            <div className="flex gap-2">
+              <input 
+                type="text" 
+                readOnly
+                value={`${typeof window !== 'undefined' ? window.location.origin : ''}/api/rss/${blog?.slug || ''}`}
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm text-gray-500 outline-none" 
+              />
+              <button 
+                type="button"
+                onClick={() => {
+                  navigator.clipboard.writeText(`${window.location.origin}/api/rss/${blog?.slug || ''}`);
+                  alert("복사되었습니다.");
+                }}
+                className="px-4 py-2 bg-gray-100 text-gray-700 rounded-xl text-sm font-medium hover:bg-gray-200 whitespace-nowrap"
+              >
+                복사
+              </button>
+            </div>
+          </div>
+          
+          <div className="pt-2">
+            <a 
+              href="https://search.google.com/search-console" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm text-blue-600 hover:text-blue-800 font-medium"
+            >
+              구글 서치콘솔 바로가기 ↗
+            </a>
           </div>
         </div>
       </div>

@@ -12,9 +12,10 @@ import { getCurrentUser } from "@/lib/auth";
  */
 function runWorkerCommand(args: string[], timeoutMs: number): Promise<{ code: number; stdout: string; stderr: string }> {
   return new Promise((resolve) => {
+    const cmd = process.platform === "win32" ? "npx.cmd" : "npx";
     const child = spawn(
-      process.execPath,
-      [path.join(process.cwd(), "node_modules", "tsx", "dist", "cli.mjs"), path.join(process.cwd(), "scripts", "publisher-worker.ts"), ...args],
+      cmd,
+      ["tsx", path.join(process.cwd(), "scripts", "publisher-worker.ts"), ...args],
       {
         cwd: process.cwd(),
         env: { ...process.env },

@@ -1,8 +1,9 @@
 import { db } from "@/db";
-import { blogs, users, articles, categories, blogSubscriptions } from "@/db/schema";
+import { blogs, users, articles, categories, blogSubscriptions, pageViews } from "@/db/schema";
 import { eq, and, desc, sql } from "drizzle-orm";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { headers } from "next/headers";
 import { getCurrentUser } from "@/lib/auth";
 import { BlogHeader } from "@/components/BlogHeader";
 
@@ -11,13 +12,17 @@ export const dynamic = "force-dynamic";
 export async function generateMetadata({ params }: { params: Promise<{ username: string }> }) {
   const { username } = await params;
   try {
-    const [blog] = await db.select({ name: blogs.name, description: blogs.description })
+    const [blog] = await db.select({ name: blogs.name, description: blogs.description, themeSettings: blogs.themeSettings })
       .from(blogs).where(eq(blogs.slug, username)).limit(1);
     if (!blog) return { title: "블로그를 찾을 수 없습니다" };
+    
+    const ts = (blog.themeSettings as any) || {};
+    
     return {
       title: blog.name + " - BlogHub",
       description: blog.description || "",
       openGraph: { title: blog.name, description: blog.description || "" },
+      verification: ts.googleSiteVerification ? { google: ts.googleSiteVerification } : undefined,
     };
   } catch {
     return { title: "BlogHub" };
@@ -133,12 +138,39 @@ export default async function BlogPage({
 
   // 8. Current user
   const currentUser = await getCurrentUser();
+
+  // 9. Record page view (IP & User-Agent)
+  try {
+    const headersList = await headers();
+    const isPrefetch = headersList.get("next-router-prefetch") === "1" || headersList.get("purpose") === "prefetch";
+    const userAgent = headersList.get("user-agent") || "";
+    const isBot = /bot|crawler|spider|crawling|googlebot|bingbot|yandex|baiduspider|facebookexternalhit|twitterbot|rogerbot|linkedinbot|embedly|quora link preview|showyoubot|outbrain|pinterest|slackbot|vkShare|W3C_Validator|whatsapp/i.test(userAgent);
+
+    if (!isPrefetch && !isBot) {
+      const rawIp = headersList.get("x-forwarded-for") || headersList.get("x-real-ip") || "unknown";
+      const ip = rawIp.split(",")[0].trim().replace(/^::ffff:/, "").replace(/^::1$/, "127.0.0.1");
+      const referer = headersList.get("referer") || "";
+
+      await db.insert(pageViews).values({
+        blogId: blog.id,
+        ip,
+        userAgent,
+        referer,
+      });
+    }
+  } catch (error) {
+    // Ignore error if recording fails
+  }
+
   const ts = (blog.themeSettings || {}) as any;
   const isDark = blog.theme === "dark" || ts.darkMode;
   const primaryColor = ts.primaryColor || "#03c75a";
 
   return (
-    <div className={`min-h-screen ${isDark ? "bg-gray-900 text-gray-100" : "bg-gray-50 text-gray-900"}`}>
+    <div 
+      className={`min-h-screen ${isDark ? "bg-gray-900 text-gray-100" : "bg-gray-50 text-gray-900"}`}
+      style={ts.backgroundImage ? { backgroundImage: `url(${ts.backgroundImage})`, backgroundSize: 'cover', backgroundAttachment: 'fixed', backgroundPosition: 'center' } : {}}
+    >
       <BlogHeader blog={blog} subscriberCount={subscriberCount} currentUser={currentUser} />
 
       <div className="max-w-5xl mx-auto px-4 py-8">

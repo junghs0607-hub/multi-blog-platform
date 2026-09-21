@@ -3,6 +3,7 @@ import { articles, blogs, users, categories, tags, articleTags, pageViews } from
 import { eq, and } from "drizzle-orm";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { headers } from "next/headers";
 import { getCurrentUser } from "@/lib/auth";
 import { ArticleInteractions } from "@/components/ArticleInteractions";
 import { CommentSection } from "@/components/CommentSection";
@@ -24,10 +25,13 @@ export async function generateMetadata({ params }: { params: Promise<{ username:
   }).from(articles).where(and(eq(articles.blogId, blog.id), eq(articles.slug, slug))).limit(1);
 
   if (!article) return {};
+  
+  const ts = (blog.themeSettings as any) || {};
 
   return {
     title: (article.seoTitle || article.title) + ` - ${username}`,
     description: article.seoDescription || article.excerpt || "",
+    verification: ts.googleSiteVerification ? { google: ts.googleSiteVerification } : undefined,
     openGraph: {
       title: article.seoTitle || article.title,
       description: article.seoDescription || article.excerpt || "",
@@ -68,8 +72,32 @@ export default async function ArticlePage({ params }: { params: Promise<{ userna
 
   if (!article || (article.status !== "published")) notFound();
 
-  // Update view count
-  await db.update(articles).set({ viewCount: (article.viewCount || 0) + 1 }).where(eq(articles.id, article.id));
+  try {
+    const headersList = await headers();
+    const isPrefetch = headersList.get("next-router-prefetch") === "1" || headersList.get("purpose") === "prefetch";
+    const userAgent = headersList.get("user-agent") || "";
+    const isBot = /bot|crawler|spider|crawling|googlebot|bingbot|yandex|baiduspider|facebookexternalhit|twitterbot|rogerbot|linkedinbot|embedly|quora link preview|showyoubot|outbrain|pinterest|slackbot|vkShare|W3C_Validator|whatsapp/i.test(userAgent);
+
+    if (!isPrefetch && !isBot) {
+      // Update view count
+      await db.update(articles).set({ viewCount: (article.viewCount || 0) + 1 }).where(eq(articles.id, article.id));
+
+      // Record page view (IP & User-Agent)
+      const rawIp = headersList.get("x-forwarded-for") || headersList.get("x-real-ip") || "unknown";
+      const ip = rawIp.split(",")[0].trim().replace(/^::ffff:/, "").replace(/^::1$/, "127.0.0.1");
+      const referer = headersList.get("referer") || "";
+
+      await db.insert(pageViews).values({
+        blogId: blog.id,
+        articleId: article.id,
+        ip,
+        userAgent,
+        referer,
+      });
+    }
+  } catch (error) {
+    // Ignore error if recording fails
+  }
 
   // Get tags
   const tagList = await db
@@ -84,7 +112,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ userna
   const primaryColor = ts.primaryColor || "#03c75a";
 
   return (
-    <div className={`min-h-screen ${isDark ? "bg-gray-900 text-gray-100" : "bg-gray-50"}`}>
+    <div 
+      className={`min-h-screen ${isDark ? "bg-gray-900 text-gray-100" : "bg-gray-50"}`}
+      style={ts.backgroundImage ? { backgroundImage: `url(${ts.backgroundImage})`, backgroundSize: 'cover', backgroundAttachment: 'fixed', backgroundPosition: 'center' } : {}}
+    >
       {/* Nav */}
       <nav className={`${isDark ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"} border-b sticky top-0 z-50`}>
         <div className="max-w-4xl mx-auto px-4 h-14 flex items-center justify-between">

@@ -55,18 +55,26 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
       .leftJoin(tags, eq(articleTags.tagId, tags.id))
       .where(eq(articleTags.articleId, article.id));
 
-    // Increment view
-    await db.update(articles).set({ viewCount: (article.viewCount || 0) + 1 }).where(eq(articles.id, article.id));
+    // Determine if it's a prefetch or bot
+    const isPrefetch = req.headers.get("next-router-prefetch") === "1" || req.headers.get("purpose") === "prefetch";
+    const userAgent = req.headers.get("user-agent") || "";
+    const isBot = /bot|crawler|spider|crawling|googlebot|bingbot|yandex|baiduspider|facebookexternalhit|twitterbot|rogerbot|linkedinbot|embedly|quora link preview|showyoubot|outbrain|pinterest|slackbot|vkShare|W3C_Validator|whatsapp/i.test(userAgent);
 
-    // Record page view
-    const ip = req.headers.get("x-forwarded-for") || "unknown";
-    await db.insert(pageViews).values({
-      blogId: article.blogId,
-      articleId: article.id,
-      ip,
-      userAgent: req.headers.get("user-agent") || "",
-      referer: req.headers.get("referer") || "",
-    });
+    if (!isPrefetch && !isBot) {
+      // Increment view
+      await db.update(articles).set({ viewCount: (article.viewCount || 0) + 1 }).where(eq(articles.id, article.id));
+
+      // Record page view
+      const rawIp = req.headers.get("x-forwarded-for") || req.headers.get("x-real-ip") || "unknown";
+      const ip = rawIp.split(",")[0].trim().replace(/^::ffff:/, "").replace(/^::1$/, "127.0.0.1");
+      await db.insert(pageViews).values({
+        blogId: article.blogId,
+        articleId: article.id,
+        ip,
+        userAgent,
+        referer: req.headers.get("referer") || "",
+      });
+    }
 
     return NextResponse.json({ article: { ...article, tags: articleTagRows } });
   } catch (error) {
