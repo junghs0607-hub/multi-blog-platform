@@ -2,12 +2,12 @@
 
 import React from "react";
 import { AppLayout } from "@/components/layout/AppLayout";
-import { AdminPortalView } from "@/components/admin/AdminPortalView";
+import { AccountsManagerView } from "@/components/accounts/AccountsManagerView";
 
-export default function AdminPage() {
+export default function AccountsPage() {
   return (
     <AppLayout>
-      <AdminPortalView />
+      <AccountsManagerView />
     </AppLayout>
   );
 }

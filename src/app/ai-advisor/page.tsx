@@ -2,12 +2,12 @@
 
 import React from "react";
 import { AppLayout } from "@/components/layout/AppLayout";
-import { AdminPortalView } from "@/components/admin/AdminPortalView";
+import { AIAdvisorView } from "@/components/ai/AIAdvisorView";
 
-export default function AdminPage() {
+export default function AIAdvisorPage() {
   return (
     <AppLayout>
-      <AdminPortalView />
+      <AIAdvisorView />
     </AppLayout>
   );
 }
