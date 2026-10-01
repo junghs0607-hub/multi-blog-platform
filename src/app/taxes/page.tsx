@@ -2,12 +2,12 @@
 
 import React from "react";
 import { AppLayout } from "@/components/layout/AppLayout";
-import { AdminPortalView } from "@/components/admin/AdminPortalView";
+import { TaxSimulatorView } from "@/components/taxes/TaxSimulatorView";
 
-export default function AdminPage() {
+export default function TaxesPage() {
   return (
     <AppLayout>
-      <AdminPortalView />
+      <TaxSimulatorView />
     </AppLayout>
   );
 }

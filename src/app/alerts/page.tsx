@@ -2,12 +2,12 @@
 
 import React from "react";
 import { AppLayout } from "@/components/layout/AppLayout";
-import { AdminPortalView } from "@/components/admin/AdminPortalView";
+import { AlertsManagerView } from "@/components/alerts/AlertsManagerView";
 
-export default function AdminPage() {
+export default function AlertsPage() {
   return (
     <AppLayout>
-      <AdminPortalView />
+      <AlertsManagerView />
     </AppLayout>
   );
 }

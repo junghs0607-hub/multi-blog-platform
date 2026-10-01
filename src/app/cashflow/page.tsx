@@ -2,12 +2,12 @@
 
 import React from "react";
 import { AppLayout } from "@/components/layout/AppLayout";
-import { AdminPortalView } from "@/components/admin/AdminPortalView";
+import { CashFlowView } from "@/components/cashflow/CashFlowView";
 
-export default function AdminPage() {
+export default function CashflowPage() {
   return (
     <AppLayout>
-      <AdminPortalView />
+      <CashFlowView />
     </AppLayout>
   );
 }
