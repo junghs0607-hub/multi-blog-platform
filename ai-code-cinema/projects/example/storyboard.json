@@ -1,0 +1,221 @@
+{
+  "topic": "작은 신호에서 시작되는 변화",
+  "style": "watercolor-brush",
+  "duration": 30.0,
+  "message": "작은의 여정을 통해 변화와 희망을 전한다.",
+  "protagonist": "traveler",
+  "keywords": [
+    "작은",
+    "신호에서",
+    "시작되는"
+  ],
+  "scenes": [
+    {
+      "scene_id": 1,
+      "act": "hook",
+      "title": "막이 오르다",
+      "start": 0.0,
+      "end": 4.348,
+      "duration": 4.348,
+      "purpose": "시청자의 관심 유도",
+      "visual": {
+        "background": "젖은 종이 위 번지는 배경 워시",
+        "subject": "traveler",
+        "composition": "medium",
+        "action": "flow",
+        "camera": "push_in",
+        "camera_from": {
+          "x": 0.486,
+          "y": 0.531,
+          "zoom": 0.875
+        },
+        "camera_to": {
+          "x": 0.493,
+          "y": 0.531,
+          "zoom": 1.125
+        },
+        "animation": "traveler subject, flow motion"
+      },
+      "narration": {
+        "text": "모든 변화는 작은에서 시작됩니다."
+      },
+      "transition_out": {
+        "type": "dissolve",
+        "duration": 0.6
+      },
+      "music_energy": 0.55
+    },
+    {
+      "scene_id": 2,
+      "act": "build",
+      "title": "세계",
+      "start": 4.948,
+      "end": 9.491,
+      "duration": 4.543,
+      "purpose": "세계관과 주인공 소개",
+      "visual": {
+        "background": "젖은 종이 위 번지는 배경 워시",
+        "subject": "traveler",
+        "composition": "aerial",
+        "action": "assemble",
+        "camera": "pan",
+        "camera_from": {
+          "x": 0.518,
+          "y": 0.486,
+          "zoom": 1.74
+        },
+        "camera_to": {
+          "x": 0.509,
+          "y": 0.486,
+          "zoom": 1.86
+        },
+        "animation": "traveler subject, assemble motion"
+      },
+      "narration": {
+        "text": "작은의 중심에는 빛나는 존재가 있습니다."
+      },
+      "transition_out": {
+        "type": "dissolve",
+        "duration": 0.6
+      },
+      "music_energy": 0.65
+    },
+    {
+      "scene_id": 3,
+      "act": "build",
+      "title": "세계",
+      "start": 10.091,
+      "end": 14.535,
+      "duration": 4.444,
+      "purpose": "세계관과 주인공 소개",
+      "visual": {
+        "background": "젖은 종이 위 번지는 배경 워시",
+        "subject": "waves",
+        "composition": "low_angle",
+        "action": "rise",
+        "camera": "pan",
+        "camera_from": {
+          "x": 0.459,
+          "y": 0.467,
+          "zoom": 0.84
+        },
+        "camera_to": {
+          "x": 0.447,
+          "y": 0.467,
+          "zoom": 0.96
+        },
+        "animation": "waves subject, rise motion"
+      },
+      "narration": {
+        "text": "작은를 이루는 조각들이 하나씩 모입니다."
+      },
+      "transition_out": {
+        "type": "dissolve",
+        "duration": 0.6
+      },
+      "music_energy": 0.65
+    },
+    {
+      "scene_id": 4,
+      "act": "change",
+      "title": "전환점",
+      "start": 15.135,
+      "end": 19.483,
+      "duration": 4.348,
+      "purpose": "갈등과 시각적 변화",
+      "visual": {
+        "background": "젖은 종이 위 번지는 배경 워시",
+        "subject": "rocket",
+        "composition": "medium",
+        "action": "flow",
+        "camera": "orbit",
+        "camera_from": {
+          "x": 0.523,
+          "y": 0.453,
+          "zoom": 0.9
+        },
+        "camera_to": {
+          "x": 0.529,
+          "y": 0.453,
+          "zoom": 1.1
+        },
+        "animation": "rocket subject, flow motion"
+      },
+      "narration": {
+        "text": "어둠 속에서 작은가 시험대에 오릅니다."
+      },
+      "transition_out": {
+        "type": "dissolve",
+        "duration": 0.6
+      },
+      "music_energy": 0.9
+    },
+    {
+      "scene_id": 5,
+      "act": "change",
+      "title": "전환점",
+      "start": 20.083,
+      "end": 24.75,
+      "duration": 4.667,
+      "purpose": "갈등과 시각적 변화",
+      "visual": {
+        "background": "젖은 종이 위 번지는 배경 워시",
+        "subject": "orb",
+        "composition": "low_angle",
+        "action": "rotate",
+        "camera": "orbit",
+        "camera_from": {
+          "x": 0.494,
+          "y": 0.487,
+          "zoom": 0.8
+        },
+        "camera_to": {
+          "x": 0.489,
+          "y": 0.487,
+          "zoom": 1.0
+        },
+        "animation": "orb subject, rotate motion"
+      },
+      "narration": {
+        "text": "작은의 질서가 흔들리기 시작합니다."
+      },
+      "transition_out": {
+        "type": "dissolve",
+        "duration": 0.6
+      },
+      "music_energy": 0.9
+    },
+    {
+      "scene_id": 6,
+      "act": "resolve",
+      "title": "새로운 빛",
+      "start": 25.35,
+      "end": 30.0,
+      "duration": 4.65,
+      "purpose": "결론과 메시지 전달",
+      "visual": {
+        "background": "젖은 종이 위 번지는 배경 워시",
+        "subject": "chart",
+        "composition": "wide",
+        "action": "drift",
+        "camera": "pull_back",
+        "camera_from": {
+          "x": 0.5,
+          "y": 0.539,
+          "zoom": 1.75
+        },
+        "camera_to": {
+          "x": 0.495,
+          "y": 0.539,
+          "zoom": 1.45
+        },
+        "animation": "chart subject, drift motion"
+      },
+      "narration": {
+        "text": "마침내 작은는 새로운 빛을 찾습니다."
+      },
+      "transition_out": null,
+      "music_energy": 0.7
+    }
+  ]
+}

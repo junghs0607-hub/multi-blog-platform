@@ -1,0 +1,14 @@
+# 필수 (기본 영상 제작에 필요)
+numpy>=1.24
+pillow>=10.0
+imageio-ffmpeg>=0.4.9  # ffmpeg 정적 바이너리 포함 (인코딩/믹싱/정규화)
+
+# 권장 (음악·효과음 합성 품질 향상)
+scipy>=1.10
+
+# 선택 (로컬 TTS 사용 시)
+# kokoro-onnx>=0.4  # + 모델 파일 별도 다운로드 필요
+# espeak-ng (시스템 패키지, apt/brew)
+
+# 선택 (웹 렌더러 프레임 캡처 시)
+# playwright (Node 또는 Python) + Chromium

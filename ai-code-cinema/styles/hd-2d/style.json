@@ -1,0 +1,31 @@
+{
+  "id": "hd-2d",
+  "name_en": "HD-2D",
+  "name_kr": "HD-2D",
+  "category": "game",
+  "palette": {
+    "bg": "#1A2238",
+    "bg2": "#2E3A5C",
+    "fg": "#F5E9D0",
+    "accent": "#FFB347",
+    "accent2": "#4FA3A3"
+  },
+  "background_rule": "입체 광원 배경 + 픽셀",
+  "texture": "mixed",
+  "line": "픽셀 + 부드러운 빛",
+  "lighting": "블룸 조명",
+  "subject_rule": "픽셀 인물 + 3D 배경",
+  "camera": "orbit",
+  "step_fps": 10,
+  "transition": "fade",
+  "transition_duration": 0.6,
+  "text_place": "bottom",
+  "sfx_profile": "retro",
+  "music_mood": "epic",
+  "forbidden": "플랫 단조, 원색 남용",
+  "renderer": "hd_2d",
+  "params": {
+    "pixel": 3,
+    "glow": 0.5
+  }
+}

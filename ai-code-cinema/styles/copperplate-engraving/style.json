@@ -1,0 +1,31 @@
+{
+  "id": "copperplate-engraving",
+  "name_en": "Copperplate Engraving",
+  "name_kr": "동판화",
+  "category": "print",
+  "palette": {
+    "bg": "#F1EAD8",
+    "bg2": "#D9CCAC",
+    "fg": "#2A2419",
+    "accent": "#5A4A2A",
+    "accent2": "#8A2A1B"
+  },
+  "background_rule": "고서지 배경",
+  "texture": "hatch",
+  "line": "정밀 해칭선",
+  "lighting": "고전 명암",
+  "subject_rule": "해칭 음영 도판",
+  "camera": "push_in",
+  "step_fps": null,
+  "transition": "fade",
+  "transition_duration": 0.6,
+  "text_place": "bottom",
+  "sfx_profile": "soft",
+  "music_mood": "calm",
+  "forbidden": "굵은 만화선, 원색, 디지털 효과",
+  "renderer": "copperplate_engraving",
+  "params": {
+    "hatch": true,
+    "grain": 0.3
+  }
+}

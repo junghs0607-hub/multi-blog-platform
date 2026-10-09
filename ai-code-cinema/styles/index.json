@@ -1,0 +1,260 @@
+[
+  {
+    "id": "crayon-book",
+    "name_en": "Crayon Picture Book",
+    "name_kr": "크레용 그림책",
+    "category": "hand"
+  },
+  {
+    "id": "watercolor-brush",
+    "name_en": "Watercolor Brush",
+    "name_kr": "수채화",
+    "category": "hand"
+  },
+  {
+    "id": "chinese-ink-wash",
+    "name_en": "Chinese Ink Wash",
+    "name_kr": "중국 수묵화",
+    "category": "hand"
+  },
+  {
+    "id": "impasto-oil",
+    "name_en": "Impasto Oil Painting",
+    "name_kr": "임파스토 유화",
+    "category": "hand"
+  },
+  {
+    "id": "one-line-drawing",
+    "name_en": "One-line Drawing",
+    "name_kr": "한 줄 그림",
+    "category": "hand"
+  },
+  {
+    "id": "whiteboard-explainer",
+    "name_en": "Whiteboard Explainer",
+    "name_kr": "화이트보드 설명 영상",
+    "category": "hand"
+  },
+  {
+    "id": "urban-sketch",
+    "name_en": "Urban Sketch",
+    "name_kr": "어반 스케치",
+    "category": "hand"
+  },
+  {
+    "id": "shadow-puppetry",
+    "name_en": "Shadow Puppetry",
+    "name_kr": "그림자 인형극",
+    "category": "east-asian"
+  },
+  {
+    "id": "ukiyo-e",
+    "name_en": "Ukiyo-e",
+    "name_kr": "우키요에 목판화",
+    "category": "east-asian"
+  },
+  {
+    "id": "red-paper-cut",
+    "name_en": "Red Paper-cut",
+    "name_kr": "붉은 종이 오리기",
+    "category": "east-asian"
+  },
+  {
+    "id": "paper-cut-lightbox",
+    "name_en": "Paper-cut Lightbox",
+    "name_kr": "페이퍼컷 라이트박스",
+    "category": "east-asian"
+  },
+  {
+    "id": "risograph-print",
+    "name_en": "Risograph Print",
+    "name_kr": "리소그래프 인쇄",
+    "category": "print"
+  },
+  {
+    "id": "halftone-dossier",
+    "name_en": "Halftone Dossier",
+    "name_kr": "복고풍 하프톤 인쇄",
+    "category": "print"
+  },
+  {
+    "id": "woodcut-print",
+    "name_en": "Woodcut Print",
+    "name_kr": "목판화",
+    "category": "print"
+  },
+  {
+    "id": "copperplate-engraving",
+    "name_en": "Copperplate Engraving",
+    "name_kr": "동판화",
+    "category": "print"
+  },
+  {
+    "id": "silkscreen-travel-poster",
+    "name_en": "Silkscreen Travel Poster",
+    "name_kr": "실크스크린 여행 포스터",
+    "category": "print"
+  },
+  {
+    "id": "swiss-motion-graphics",
+    "name_en": "Swiss Motion Graphics",
+    "name_kr": "스위스 모션그래픽",
+    "category": "graphic"
+  },
+  {
+    "id": "spy-title-60s",
+    "name_en": "60s Spy Title Sequence",
+    "name_kr": "1960년대 첩보 타이틀",
+    "category": "graphic"
+  },
+  {
+    "id": "art-deco",
+    "name_en": "Art Deco",
+    "name_kr": "아르데코",
+    "category": "graphic"
+  },
+  {
+    "id": "blueprint",
+    "name_en": "Blueprint",
+    "name_kr": "청사진 기술 도면",
+    "category": "graphic"
+  },
+  {
+    "id": "stained-glass",
+    "name_en": "Stained Glass",
+    "name_kr": "스테인드글라스",
+    "category": "graphic"
+  },
+  {
+    "id": "pictogram-motion",
+    "name_en": "Pictogram Motion",
+    "name_kr": "픽토그램 애니메이션",
+    "category": "graphic"
+  },
+  {
+    "id": "ascii-crt-terminal",
+    "name_en": "ASCII / CRT Terminal",
+    "name_kr": "ASCII CRT 터미널",
+    "category": "graphic"
+  },
+  {
+    "id": "data-storytelling",
+    "name_en": "Data Storytelling",
+    "name_kr": "데이터 스토리텔링",
+    "category": "info"
+  },
+  {
+    "id": "isometric-infographic",
+    "name_en": "Isometric Infographic",
+    "name_kr": "아이소메트릭 인포그래픽",
+    "category": "info"
+  },
+  {
+    "id": "dark-tech-keynote",
+    "name_en": "Dark Tech Keynote",
+    "name_kr": "다크 테크 키노트",
+    "category": "info"
+  },
+  {
+    "id": "living-screencast",
+    "name_en": "Living Screencast",
+    "name_kr": "리빙 스크린캐스트",
+    "category": "info"
+  },
+  {
+    "id": "scifi-hologram-hud",
+    "name_en": "Sci-fi Hologram HUD",
+    "name_kr": "SF 홀로그램 HUD",
+    "category": "info"
+  },
+  {
+    "id": "rubber-hose-1930s",
+    "name_en": "1930s Rubber Hose Cartoon",
+    "name_kr": "1930년대 러버호스 만화",
+    "category": "cartoon"
+  },
+  {
+    "id": "cel-anime-80s",
+    "name_en": "80s Cel Anime",
+    "name_kr": "1980년대 셀 애니메이션",
+    "category": "cartoon"
+  },
+  {
+    "id": "scifi-sitcom-toon",
+    "name_en": "Sci-Fi Sitcom Toon",
+    "name_kr": "SF 시트콤 툰",
+    "category": "cartoon"
+  },
+  {
+    "id": "midcentury-cartoon",
+    "name_en": "Mid-century Cartoon",
+    "name_kr": "미드센추리 교육 만화",
+    "category": "cartoon"
+  },
+  {
+    "id": "pixel-rpg-16bit",
+    "name_en": "16-bit Pixel RPG",
+    "name_kr": "16비트 픽셀 RPG",
+    "category": "game"
+  },
+  {
+    "id": "hd-2d",
+    "name_en": "HD-2D",
+    "name_kr": "HD-2D",
+    "category": "game"
+  },
+  {
+    "id": "microgame-frenzy",
+    "name_en": "Microgame Frenzy",
+    "name_kr": "마이크로게임 프렌지",
+    "category": "game"
+  },
+  {
+    "id": "game-show-flat",
+    "name_en": "Game Show Flat",
+    "name_kr": "게임쇼 플랫 그래픽",
+    "category": "game"
+  },
+  {
+    "id": "silent-film-1920s",
+    "name_en": "1920s Silent Film",
+    "name_kr": "1920년대 무성영화",
+    "category": "film"
+  },
+  {
+    "id": "liminal-found-footage",
+    "name_en": "Liminal Found Footage",
+    "name_kr": "리미널 파운드푸티지",
+    "category": "film"
+  },
+  {
+    "id": "brick-toy",
+    "name_en": "Brick Toy",
+    "name_kr": "블록 장난감",
+    "category": "material"
+  },
+  {
+    "id": "paper-pop-up-book",
+    "name_en": "Paper Pop-up Book",
+    "name_kr": "종이 팝업북",
+    "category": "material"
+  },
+  {
+    "id": "tilt-shift-miniature",
+    "name_en": "Tilt-Shift Miniature",
+    "name_kr": "틸트시프트 미니어처",
+    "category": "material"
+  },
+  {
+    "id": "lowpoly-isometric-island",
+    "name_en": "Low-poly Isometric Island",
+    "name_kr": "로우폴리 섬",
+    "category": "material"
+  },
+  {
+    "id": "glass-product-render",
+    "name_en": "Glass Product Render",
+    "name_kr": "글래스 제품 렌더링",
+    "category": "material"
+  }
+]

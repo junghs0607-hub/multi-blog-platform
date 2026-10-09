@@ -1,0 +1,30 @@
+{
+  "id": "living-screencast",
+  "name_en": "Living Screencast",
+  "name_kr": "리빙 스크린캐스트",
+  "category": "info",
+  "palette": {
+    "bg": "#E8EDF2",
+    "bg2": "#CBD5E0",
+    "fg": "#1A202C",
+    "accent": "#3182CE",
+    "accent2": "#38A169"
+  },
+  "background_rule": "데스크톱 배경",
+  "texture": "none",
+  "line": "UI 윈도우",
+  "lighting": "화면광",
+  "subject_rule": "앱 윈도우·커서",
+  "camera": "pan",
+  "step_fps": null,
+  "transition": "wipe",
+  "transition_duration": 0.6,
+  "text_place": "bottom",
+  "sfx_profile": "click",
+  "music_mood": "bright",
+  "forbidden": "영화 조명, 질감, 장식",
+  "renderer": "living_screencast",
+  "params": {
+    "cursor": true
+  }
+}

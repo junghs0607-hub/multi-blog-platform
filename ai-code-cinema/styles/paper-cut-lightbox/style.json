@@ -1,0 +1,31 @@
+{
+  "id": "paper-cut-lightbox",
+  "name_en": "Paper-cut Lightbox",
+  "name_kr": "페이퍼컷 라이트박스",
+  "category": "east-asian",
+  "palette": {
+    "bg": "#0E1B2C",
+    "bg2": "#1E3A5C",
+    "fg": "#FFF3D6",
+    "accent": "#FFB347",
+    "accent2": "#4FA3A3"
+  },
+  "background_rule": "어두운 상자 속 조명 레이어",
+  "texture": "paper",
+  "line": "레이어 단면",
+  "lighting": "내부 발광",
+  "subject_rule": "다층 종이 풍경",
+  "camera": "push_in",
+  "step_fps": null,
+  "transition": "fade",
+  "transition_duration": 0.6,
+  "text_place": "bottom",
+  "sfx_profile": "soft",
+  "music_mood": "dreamy",
+  "forbidden": "낮 장면, 강한 채도 원색, 플랫 단층",
+  "renderer": "paper_cut_lightbox",
+  "params": {
+    "layers": 5,
+    "glow": 0.6
+  }
+}

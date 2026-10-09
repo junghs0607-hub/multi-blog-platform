@@ -1,0 +1,31 @@
+{
+  "id": "paper-pop-up-book",
+  "name_en": "Paper Pop-up Book",
+  "name_kr": "종이 팝업북",
+  "category": "material",
+  "palette": {
+    "bg": "#F7F2E5",
+    "bg2": "#E0D4B8",
+    "fg": "#4A3F30",
+    "accent": "#C8553D",
+    "accent2": "#3D7EA6"
+  },
+  "background_rule": "펼쳐진 책",
+  "texture": "paper",
+  "line": "접힌 종이 가장자리",
+  "lighting": "소프트 섀도우",
+  "subject_rule": "팝업 종이 조형",
+  "camera": "push_in",
+  "step_fps": null,
+  "transition": "wipe",
+  "transition_duration": 0.6,
+  "text_place": "bottom",
+  "sfx_profile": "soft",
+  "music_mood": "playful",
+  "forbidden": "금속 광택, 네온, 사진",
+  "renderer": "paper_pop_up_book",
+  "params": {
+    "fold_shadow": true,
+    "grain": 0.15
+  }
+}

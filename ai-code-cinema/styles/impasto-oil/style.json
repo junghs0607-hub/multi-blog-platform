@@ -1,0 +1,31 @@
+{
+  "id": "impasto-oil",
+  "name_en": "Impasto Oil Painting",
+  "name_kr": "임파스토 유화",
+  "category": "hand",
+  "palette": {
+    "bg": "#2B2118",
+    "bg2": "#6B4F2A",
+    "fg": "#F5E9D0",
+    "accent": "#E8A020",
+    "accent2": "#7FB069"
+  },
+  "background_rule": "두꺼운 물감 터치의 캔버스",
+  "texture": "impasto",
+  "line": "두꺼운 나이프 터치",
+  "lighting": "측광의 입체감",
+  "subject_rule": "두껍게 칠해진 풍경",
+  "camera": "push_in",
+  "step_fps": null,
+  "transition": "dissolve",
+  "transition_duration": 0.6,
+  "text_place": "bottom",
+  "sfx_profile": "deep",
+  "music_mood": "epic",
+  "forbidden": "평면 벡터, 파스텔, 얇은 선",
+  "renderer": "impasto_oil",
+  "params": {
+    "impasto": 0.8,
+    "grain": 0.3
+  }
+}

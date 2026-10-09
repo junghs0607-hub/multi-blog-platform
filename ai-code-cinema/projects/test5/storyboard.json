@@ -1,0 +1,81 @@
+{
+  "topic": "작은 신호에서 시작되는 변화",
+  "style": "watercolor-brush",
+  "duration": 5.0,
+  "message": "작은의 여정을 통해 변화와 희망을 전한다.",
+  "protagonist": "traveler",
+  "keywords": [
+    "작은",
+    "신호에서",
+    "시작되는"
+  ],
+  "scenes": [
+    {
+      "scene_id": 1,
+      "act": "hook",
+      "title": "막이 오르다",
+      "start": 0.0,
+      "end": 2.152,
+      "duration": 2.152,
+      "purpose": "시청자의 관심 유도",
+      "visual": {
+        "background": "젖은 종이 위 번지는 배경 워시",
+        "subject": "traveler",
+        "composition": "medium",
+        "action": "flow",
+        "camera": "push_in",
+        "camera_from": {
+          "x": 0.526,
+          "y": 0.464,
+          "zoom": 0.875
+        },
+        "camera_to": {
+          "x": 0.531,
+          "y": 0.464,
+          "zoom": 1.125
+        },
+        "animation": "traveler subject, flow motion"
+      },
+      "narration": {
+        "text": "모든 변화는 작은에서 시작됩니다."
+      },
+      "transition_out": {
+        "type": "dissolve",
+        "duration": 0.6
+      },
+      "music_energy": 0.55
+    },
+    {
+      "scene_id": 2,
+      "act": "build",
+      "title": "세계",
+      "start": 2.752,
+      "end": 5.0,
+      "duration": 2.248,
+      "purpose": "세계관과 주인공 소개",
+      "visual": {
+        "background": "젖은 종이 위 번지는 배경 워시",
+        "subject": "traveler",
+        "composition": "aerial",
+        "action": "assemble",
+        "camera": "pan",
+        "camera_from": {
+          "x": 0.524,
+          "y": 0.49,
+          "zoom": 1.74
+        },
+        "camera_to": {
+          "x": 0.574,
+          "y": 0.49,
+          "zoom": 1.86
+        },
+        "animation": "traveler subject, assemble motion"
+      },
+      "narration": {
+        "text": "작은의 중심에는 빛나는 존재가 있습니다."
+      },
+      "transition_out": null,
+      "music_energy": 0.65
+    }
+  ]
+}

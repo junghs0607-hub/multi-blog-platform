@@ -1,0 +1,31 @@
+{
+  "id": "glass-product-render",
+  "name_en": "Glass Product Render",
+  "name_kr": "글래스 제품 렌더링",
+  "category": "material",
+  "palette": {
+    "bg": "#0A0E14",
+    "bg2": "#16202E",
+    "fg": "#F5F7FA",
+    "accent": "#7FD4FF",
+    "accent2": "#C9A7FF"
+  },
+  "background_rule": "어두운 스튜디오",
+  "texture": "glass",
+  "line": "굴절 하이라이트",
+  "lighting": "림라이트",
+  "subject_rule": "유리 제품",
+  "camera": "orbit",
+  "step_fps": null,
+  "transition": "fade",
+  "transition_duration": 0.6,
+  "text_place": "bottom",
+  "sfx_profile": "chime",
+  "music_mood": "epic",
+  "forbidden": "종이 질감, 손그림, 밝은 배경",
+  "renderer": "glass_product_render",
+  "params": {
+    "glow": 0.6,
+    "reflection": true
+  }
+}

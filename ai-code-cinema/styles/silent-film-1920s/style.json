@@ -1,0 +1,33 @@
+{
+  "id": "silent-film-1920s",
+  "name_en": "1920s Silent Film",
+  "name_kr": "1920년대 무성영화",
+  "category": "film",
+  "palette": {
+    "bg": "#0A0A0A",
+    "bg2": "#1A1A1A",
+    "fg": "#E8E0C8",
+    "accent": "#E8E0C8",
+    "accent2": "#8A8A8A"
+  },
+  "background_rule": "흑백 필름",
+  "texture": "grain",
+  "line": "부드러운 흑백",
+  "lighting": "강한 명암",
+  "subject_rule": "무성영화 장면",
+  "camera": "push_in",
+  "step_fps": 16,
+  "transition": "iris",
+  "transition_duration": 0.6,
+  "text_place": "in-scene",
+  "sfx_profile": "retro",
+  "music_mood": "dark",
+  "forbidden": "컬러, 현대 UI, CG",
+  "renderer": "silent_film_1920s",
+  "params": {
+    "grain": 0.6,
+    "vignette": 0.6,
+    "flicker": 0.15,
+    "scratch": true
+  }
+}

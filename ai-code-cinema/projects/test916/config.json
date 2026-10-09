@@ -1,0 +1,20 @@
+{
+  "topic": "픽셀 용사의 모험",
+  "duration": 5.0,
+  "aspect": "9:16",
+  "resolution": "720x1280",
+  "fps": 24,
+  "style": "pixel-rpg-16bit",
+  "language": "ko",
+  "voice": "auto",
+  "music_mood": "playful",
+  "subtitles": true,
+  "sfx": true,
+  "storyboard_preview": true,
+  "engine": "python",
+  "video_codec": "libx264",
+  "audio_codec": "aac",
+  "output_format": "mp4",
+  "loudness_lufs": -14,
+  "seed": 20261009
+}

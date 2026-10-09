@@ -1,0 +1,38 @@
+{
+  "video": {
+    "info": {
+      "path": "/home/user/multi-blog-platform/ai-code-cinema/projects/test916/output/final.mp4",
+      "duration": 5.0,
+      "width": 720,
+      "height": 1280,
+      "fps": 24.0,
+      "vcodec": "h264",
+      "acodec": "aac"
+    },
+    "checks": {
+      "exists": true,
+      "duration_ok": true,
+      "resolution_ok": true,
+      "fps_ok": true,
+      "vcodec_ok": true,
+      "acodec_ok": true
+    }
+  },
+  "frames": {
+    "count": 120,
+    "count_ok": true,
+    "order_ok": true,
+    "black_frames": [],
+    "black_ok": true
+  },
+  "audio": {
+    "duration": 5.0,
+    "duration_ok": true,
+    "peak": 0.64556884765625,
+    "clipping_ok": true,
+    "rms": 0.1381043791770935,
+    "silent": false
+  },
+  "srt_exists": true,
+  "pass": true
+}

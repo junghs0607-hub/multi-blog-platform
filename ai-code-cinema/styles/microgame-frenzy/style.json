@@ -1,0 +1,30 @@
+{
+  "id": "microgame-frenzy",
+  "name_en": "Microgame Frenzy",
+  "name_kr": "마이크로게임 프렌지",
+  "category": "game",
+  "palette": {
+    "bg": "#111111",
+    "bg2": "#222222",
+    "fg": "#FFFFFF",
+    "accent": "#FFD23F",
+    "accent2": "#FF4D6D"
+  },
+  "background_rule": "빠르게 바뀌는 단색",
+  "texture": "none",
+  "line": "굵은 플랫",
+  "lighting": "플랫",
+  "subject_rule": "미니게임 조각",
+  "camera": "pan",
+  "step_fps": 12,
+  "transition": "cut",
+  "transition_duration": 0.6,
+  "text_place": "in-scene",
+  "sfx_profile": "pop",
+  "music_mood": "playful",
+  "forbidden": "느린 전개, 여백, 파스텔",
+  "renderer": "microgame_frenzy",
+  "params": {
+    "fast_cut": true
+  }
+}

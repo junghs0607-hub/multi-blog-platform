@@ -1,0 +1,30 @@
+{
+  "id": "pictogram-motion",
+  "name_en": "Pictogram Motion",
+  "name_kr": "픽토그램 애니메이션",
+  "category": "graphic",
+  "palette": {
+    "bg": "#F5F5F5",
+    "bg2": "#E0E0E0",
+    "fg": "#1A1A1A",
+    "accent": "#1D6FB8",
+    "accent2": "#E4572E"
+  },
+  "background_rule": "단색 배경",
+  "texture": "none",
+  "line": "균일한 픽토그램",
+  "lighting": "플랫",
+  "subject_rule": "움직이는 픽토그램",
+  "camera": "pan",
+  "step_fps": 12,
+  "transition": "cut",
+  "transition_duration": 0.6,
+  "text_place": "bottom",
+  "sfx_profile": "pop",
+  "music_mood": "playful",
+  "forbidden": "그라데이션, 질감, 세밀 묘사",
+  "renderer": "pictogram_motion",
+  "params": {
+    "grain": 0.0
+  }
+}

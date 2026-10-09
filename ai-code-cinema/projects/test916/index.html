@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><title>픽셀 용사의 모험 - AI Code Cinema</title>
+<style>html,body{margin:0;padding:0;background:#000;overflow:hidden}
+canvas{display:block;width:720px;height:1280px}</style></head>
+<body><canvas id="c" width="720" height="1280"></canvas>
+<script>
+"use strict";
+const SB = {"topic": "픽셀 용사의 모험", "style": "pixel-rpg-16bit", "duration": 5.0, "message": "픽셀의 여정을 통해 변화와 희망을 전한다.", "protagonist": "landscape", "keywords": ["픽셀", "용사의", "모험"], "scenes": [{"scene_id": 1, "act": "hook", "title": "막이 오르다", "start": 0.0, "end": 2.128, "duration": 2.128, "purpose": "시청자의 관심 유도", "visual": {"background": "픽셀 필드 배경", "subject": "landscape", "composition": "wide", "action": "orbiting", "camera": "push_in", "camera_from": {"x": 0.546, "y": 0.524, "zoom": 1.475}, "camera_to": {"x": 0.529, "y": 0.524, "zoom": 1.725}, "animation": "landscape subject, orbiting motion"}, "narration": {"text": "지금부터 픽셀의 세계로 안내합니다."}, "transition_out": {"type": "cut", "duration": 0.6}, "music_energy": 0.55}, {"scene_id": 2, "act": "build", "title": "세계", "start": 2.728, "end": 5.0, "duration": 2.272, "purpose": "세계관과 주인공 소개", "visual": {"background": "픽셀 필드 배경", "subject": "city", "composition": "low_angle", "action": "drift", "camera": "pan", "camera_from": {"x": 0.468, "y": 0.505, "zoom": 0.84}, "camera_to": {"x": 0.545, "y": 0.505, "zoom": 0.96}, "animation": "city subject, drift motion"}, "narration": {"text": "픽셀를 이루는 조각들이 하나씩 모입니다."}, "transition_out": null, "music_energy": 0.65}]};
+const TL = {"duration": 5.0, "fps": 24, "scenes": [{"scene_id": 1, "act": "hook", "start": 0.0, "end": 2.128, "transition_out": {"type": "cut", "duration": 0.6}}, {"scene_id": 2, "act": "build", "start": 2.728, "end": 5.0, "transition_out": null}], "narration": [{"scene_id": 1, "text": "지금부터 픽셀의 세계로 안내합니다.", "start": 0.3, "end": 2.528, "wav": "audio/voices/scene_01.wav", "source": "estimated_silence"}, {"scene_id": 2, "text": "픽셀를 이루는 조각들이 하나씩 모입니다.", "start": 3.028, "end": 5.0, "wav": "audio/voices/scene_02.wav", "source": "estimated_silence"}], "subtitles": [{"scene_id": 1, "text": "지금부터 픽셀의 세계로 안내합니다.", "start": 0.3, "end": 2.528}, {"scene_id": 2, "text": "픽셀를 이루는 조각들이 하나씩 모입니다.", "start": 3.028, "end": 5.0}], "sfx": [{"time": 0.319, "type": "soft_impact", "scene_id": 1, "volume": 0.7, "pan": 0.0}, {"time": 1.49, "type": "shimmer", "scene_id": 1, "volume": 0.7, "pan": 0.0}, {"time": 2.428, "type": "whoosh_soft", "scene_id": 1, "volume": 0.4, "pan": 0.0}, {"time": 3.296, "type": "pop", "scene_id": 2, "volume": 0.7, "pan": 0.0}, {"time": 4.091, "type": "tick", "scene_id": 2, "volume": 0.7, "pan": 0.0}], "music": {"mood": "playful", "ducking": true}};
+const STYLE = {"id": "pixel-rpg-16bit", "name_en": "16-bit Pixel RPG", "name_kr": "16비트 픽셀 RPG", "category": "game", "palette": {"bg": "#0F380F", "bg2": "#306230", "fg": "#9BBC0F", "accent": "#8BAC0F", "accent2": "#306230"}, "background_rule": "픽셀 필드 배경", "texture": "pixel", "line": "픽셀 계단", "lighting": "플랫", "subject_rule": "픽셀 캐릭터·타일", "camera": "pan", "step_fps": 8, "transition": "cut", "transition_duration": 0.6, "text_place": "in-scene", "sfx_profile": "retro", "music_mood": "playful", "forbidden": "부드러운 곡선, 그라데이션, 고해상도", "renderer": "pixel_rpg_16bit", "params": {"pixel": 4}};
+window.DUR = SB.duration;
+window.EV = TL.sfx.map(e => ({time: e.time, type: e.type, volume: e.volume}));
+window.TEXTS = function(t) {
+  const out = [];
+  for (const c of TL.subtitles) if (c.start <= t && t < c.end) out.push({text: c.text});
+  return out;
+};
+function mulberry32(a) { return function() { a |= 0; a = a + 0x6D2B79F5 | 0;
+  let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+  return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const SEED = 20261009;
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const W = canvas.width, H = canvas.height;
+function lerp(a,b,t){return a+(b-a)*t;}
+function sstep(t){t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);}
+function segAt(t) {
+  const ss = SB.scenes;
+  for (let i=0;i<ss.length;i++) {
+    const s = ss[i];
+    const tr = s.transition_out ? s.transition_out.duration : 0;
+    if (t < s.end) return {kind:'scene', s, lt:(t-s.start)/(s.end-s.start), nxt:null, p:0};
+    if (tr && t < s.end+tr) return {kind:'trans', s, lt:1, nxt:ss[i+1], p:(t-s.end)/tr};
+  }
+  return {kind:'scene', s:ss[ss.length-1], lt:1, nxt:null, p:0};
+}
+function camAt(s, lt) {
+  const f=s.visual.camera_from, g=s.visual.camera_to, e=sstep(lt);
+  return {x:lerp(f.x,g.x,e), y:lerp(f.y,g.y,e), z:lerp(f.zoom,g.zoom,e)};
+}
+function drawScene(s, lt, t, alpha) {
+  const P = STYLE.palette, rng = mulberry32(SEED + s.scene_id*7919);
+  ctx.save(); ctx.globalAlpha = alpha;
+  const cam = camAt(s, lt);
+  // 카메라: 화면 중심 기준 스케일/이동
+  ctx.translate(W/2, H/2); ctx.scale(cam.z, cam.z);
+  ctx.translate(-cam.x*W, -cam.y*H);
+  // 배경
+  const gr = ctx.createLinearGradient(0,0,0,H);
+  gr.addColorStop(0,P.bg); gr.addColorStop(1,P.bg2);
+  ctx.fillStyle = gr; ctx.fillRect(-W,-H,W*3,H*3);
+  const subj = s.visual.subject, comp = s.visual.composition, act = s.visual.action;
+  const S = Math.min(W,H), cx = W*0.5+(act==='drift'?(lt-0.5)*W*0.2:0);
+  let cy = H*0.55, sc = 0.24*S;
+  if (comp==='wide') sc=0.16*S; if (comp==='close') sc=0.38*S;
+  if (act==='rise') cy = H*0.9-(H*0.9-H*0.55)*sstep(lt);
+  if (act==='pulse') sc *= 1+0.08*Math.sin(lt*Math.PI*4);
+  if (act==='grow') sc *= 0.3+0.7*sstep(lt);
+  if (act==='orbiting') { cx+=Math.cos(lt*Math.PI*2)*W*0.12; cy+=Math.sin(lt*Math.PI*2)*H*0.08; }
+  const rot = act==='rotate' ? lt*Math.PI*2 : t;
+  ctx.fillStyle=P.accent; ctx.strokeStyle=P.fg; ctx.lineWidth=4;
+  if (subj==='orb') { ctx.beginPath(); ctx.arc(cx,cy+Math.sin(t*2)*8,sc,0,7); ctx.fill(); ctx.stroke(); }
+  else if (subj==='landscape') {
+    ctx.fillStyle=P.accent; ctx.beginPath(); ctx.arc(W*0.72,H*0.3,sc*0.5,0,7); ctx.fill();
+    ctx.fillStyle=P.fg; ctx.beginPath(); ctx.moveTo(0,H);
+    for(let i=0;i<=8;i++) ctx.lineTo(W*i/8, H*0.62-Math.abs(Math.sin(i*2.3+s.scene_id))*H*0.2);
+    ctx.lineTo(W,H); ctx.closePath(); ctx.globalAlpha*=0.75; ctx.fill(); ctx.globalAlpha/=0.75;
+  }
+  else if (subj==='city') {
+    for(let i=0;i<10;i++){ const bw=W*0.08, bh=H*(0.15+rng()*0.3), x=W*0.05+i*W*0.09;
+      ctx.fillStyle=P.fg; ctx.globalAlpha*=0.7; ctx.fillRect(x,H*0.85-bh,bw,bh); ctx.globalAlpha/=0.7;
+      ctx.fillStyle=P.accent; ctx.fillRect(x+6,H*0.85-bh+8,8,10); }
+  }
+  else if (subj==='traveler') {
+    ctx.fillStyle=P.accent; ctx.beginPath();
+    ctx.moveTo(cx,cy-sc); ctx.lineTo(cx-sc*0.55,cy+sc); ctx.lineTo(cx+sc*0.55,cy+sc);
+    ctx.closePath(); ctx.fill(); ctx.stroke();
+    ctx.beginPath(); ctx.arc(cx,cy-sc*1.35,sc*0.26,0,7); ctx.fill(); ctx.stroke();
+  }
+  else if (subj==='tree') {
+    const g=sstep(lt*1.4); ctx.strokeStyle=P.fg; ctx.lineWidth=sc*0.18;
+    ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(cx,cy-sc*1.6*g); ctx.stroke();
+    if(g>0.35){ ctx.fillStyle=P.accent2; ctx.beginPath();
+      ctx.arc(cx,cy-sc*1.6*g-sc*0.4,sc*(0.9+0.3*g),0,7); ctx.fill(); ctx.stroke(); }
+  }
+  else if (subj==='chart') {
+    for(let i=0;i<7;i++){ const h=H*0.5*(0.3+rng()*0.7)*Math.min(1,lt*1.4-i*0.06);
+      ctx.fillStyle=i%2?P.accent2:P.accent;
+      ctx.fillRect(W*0.15+i*W*0.1,H*0.78-h,W*0.07,h); }
+  }
+  else if (subj==='gears') {
+    for (const [gx,gy,gr2,rr] of [[cx-sc,cy,sc*0.8,rot],[cx+sc,cy-sc*0.3,sc*0.55,-rot*1.4]]) {
+      ctx.strokeStyle=P.fg; ctx.lineWidth=4;
+      for(let i=0;i<10;i++){ const a=rr+i*Math.PI/5;
+        ctx.beginPath(); ctx.moveTo(gx+Math.cos(a)*gr2*0.85,gy+Math.sin(a)*gr2*0.85);
+        ctx.lineTo(gx+Math.cos(a)*gr2*1.15,gy+Math.sin(a)*gr2*1.15); ctx.stroke(); }
+      ctx.beginPath(); ctx.arc(gx,gy,gr2*0.85,0,7); ctx.stroke();
+    }
+  }
+  else if (subj==='waves') {
+    for(let r=0;r<4;r++){ ctx.strokeStyle=r%2?P.accent2:P.accent; ctx.lineWidth=4;
+      ctx.beginPath();
+      for(let i=0;i<=64;i++){ const x=W*i/64, y=H*(0.6+r*0.08)+Math.sin(i*0.4+t*3+r)*H*0.03;
+        i?ctx.lineTo(x,y):ctx.moveTo(x,y); } ctx.stroke(); }
+  }
+  else if (subj==='rocket') {
+    const ry = cy - sstep(t*0.05)*H*0.1;
+    ctx.fillStyle=P.accent2; ctx.beginPath();
+    ctx.moveTo(cx-sc*0.3,ry+sc); ctx.lineTo(cx+sc*0.3,ry+sc); ctx.lineTo(cx,ry+sc*1.6); ctx.fill();
+    ctx.fillStyle=P.accent; ctx.beginPath(); ctx.ellipse(cx,ry-sc*0.2,sc*0.45,sc*1.2,0,0,7);
+    ctx.fill(); ctx.stroke();
+  }
+  // 파티클 (결정적)
+  ctx.fillStyle=P.accent;
+  for(let i=0;i<40;i++){ const r1=mulberry32(SEED+i)(), r2=mulberry32(SEED+i+999)();
+    const x=(r1*W+t*20)%W, y=(r2*H+t*12)%H;
+    ctx.globalAlpha=alpha*0.6; ctx.fillRect(x,y,3,3); }
+  ctx.restore();
+}
+window.render = function(t) {
+  t = Math.max(0, Math.min(SB.duration-1e-4, t));
+  ctx.clearRect(0,0,W,H);
+  const sg = segAt(t);
+  if (sg.kind==='scene') { drawScene(sg.s, sg.lt, t, 1); }
+  else {
+    const type = sg.s.transition_out.type;
+    if (type==='cut') { drawScene(sg.p<0.5?sg.s:sg.nxt, sg.p<0.5?1:0, t, 1); }
+    else { drawScene(sg.s, 1, t, 1); drawScene(sg.nxt, 0, t, sstep(sg.p)); }
+  }
+  // 자막
+  const tx = window.TEXTS(t);
+  if (tx.length) {
+    ctx.font = `bold ${Math.round(H*0.045)}px sans-serif`;
+    ctx.textAlign='center';
+    const tw = ctx.measureText(tx[0].text).width;
+    ctx.fillStyle='rgba(0,0,0,0.55)';
+    ctx.fillRect(W/2-tw/2-16, H*0.82, tw+32, H*0.075);
+    ctx.fillStyle='#fff'; ctx.fillText(tx[0].text, W/2, H*0.82+H*0.052);
+  }
+};
+window.READY = true;
+</script></body></html>

@@ -1,0 +1,31 @@
+{
+  "id": "swiss-motion-graphics",
+  "name_en": "Swiss Motion Graphics",
+  "name_kr": "스위스 모션그래픽",
+  "category": "graphic",
+  "palette": {
+    "bg": "#FFFFFF",
+    "bg2": "#F0F0F0",
+    "fg": "#111111",
+    "accent": "#E30613",
+    "accent2": "#111111"
+  },
+  "background_rule": "흰색 그리드",
+  "texture": "none",
+  "line": "정확한 직선",
+  "lighting": "플랫",
+  "subject_rule": "그리드 기반 도형",
+  "camera": "pan",
+  "step_fps": null,
+  "transition": "cut",
+  "transition_duration": 0.6,
+  "text_place": "in-scene",
+  "sfx_profile": "click",
+  "music_mood": "minimal",
+  "forbidden": "장식, 질감, 곡선 남용",
+  "renderer": "swiss_motion_graphics",
+  "params": {
+    "grid": true,
+    "grain": 0.0
+  }
+}

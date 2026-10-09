@@ -1,0 +1,31 @@
+{
+  "id": "urban-sketch",
+  "name_en": "Urban Sketch",
+  "name_kr": "어반 스케치",
+  "category": "hand",
+  "palette": {
+    "bg": "#F4EFE6",
+    "bg2": "#D9CFBB",
+    "fg": "#2B2B2B",
+    "accent": "#C8553D",
+    "accent2": "#3D7EA6"
+  },
+  "background_rule": "스케치북 종이",
+  "texture": "paper",
+  "line": "펜 드로잉 + 수채 워시",
+  "lighting": "자연광",
+  "subject_rule": "도시 풍경·건물",
+  "camera": "pan",
+  "step_fps": null,
+  "transition": "dissolve",
+  "transition_duration": 0.6,
+  "text_place": "bottom",
+  "sfx_profile": "soft",
+  "music_mood": "calm",
+  "forbidden": "완벽한 직선, CG 광택, 네온",
+  "renderer": "urban_sketch",
+  "params": {
+    "grain": 0.3,
+    "wash": 0.5
+  }
+}

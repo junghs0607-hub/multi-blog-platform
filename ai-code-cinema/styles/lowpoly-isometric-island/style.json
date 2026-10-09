@@ -1,0 +1,30 @@
+{
+  "id": "lowpoly-isometric-island",
+  "name_en": "Low-poly Isometric Island",
+  "name_kr": "로우폴리 섬",
+  "category": "material",
+  "palette": {
+    "bg": "#AEE3F5",
+    "bg2": "#5EB1D6",
+    "fg": "#2B3A42",
+    "accent": "#7FB069",
+    "accent2": "#E8A020"
+  },
+  "background_rule": "하늘 그라데이션",
+  "texture": "facet",
+  "line": "로우폴리 면",
+  "lighting": "따뜻한 태양광",
+  "subject_rule": "떠다니는 섬",
+  "camera": "orbit",
+  "step_fps": null,
+  "transition": "fade",
+  "transition_duration": 0.6,
+  "text_place": "bottom",
+  "sfx_profile": "soft",
+  "music_mood": "dreamy",
+  "forbidden": "사실적 질감, 어두운 톤, 노이즈",
+  "renderer": "lowpoly_isometric_island",
+  "params": {
+    "facets": true
+  }
+}

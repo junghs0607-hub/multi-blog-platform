@@ -1,0 +1,31 @@
+{
+  "id": "woodcut-print",
+  "name_en": "Woodcut Print",
+  "name_kr": "목판화",
+  "category": "print",
+  "palette": {
+    "bg": "#EFE3CC",
+    "bg2": "#D6C096",
+    "fg": "#191919",
+    "accent": "#191919",
+    "accent2": "#8A5A2B"
+  },
+  "background_rule": "종이 배경",
+  "texture": "woodgrain",
+  "line": "굵은 조각선",
+  "lighting": "강한 명암",
+  "subject_rule": "흑백 대비 그래픽",
+  "camera": "push_in",
+  "step_fps": null,
+  "transition": "cut",
+  "transition_duration": 0.6,
+  "text_place": "bottom",
+  "sfx_profile": "deep",
+  "music_mood": "epic",
+  "forbidden": "회색조 그라데이션, 파스텔, 얇은 선",
+  "renderer": "woodcut_print",
+  "params": {
+    "contrast": 0.9,
+    "grain": 0.3
+  }
+}

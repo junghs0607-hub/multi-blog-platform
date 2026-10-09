@@ -1,0 +1,96 @@
+{
+  "duration": 5.0,
+  "fps": 24,
+  "scenes": [
+    {
+      "scene_id": 1,
+      "act": "hook",
+      "start": 0.0,
+      "end": 2.152,
+      "transition_out": {
+        "type": "dissolve",
+        "duration": 0.6
+      }
+    },
+    {
+      "scene_id": 2,
+      "act": "build",
+      "start": 2.752,
+      "end": 5.0,
+      "transition_out": null
+    }
+  ],
+  "narration": [
+    {
+      "scene_id": 1,
+      "text": "모든 변화는 작은에서 시작됩니다.",
+      "start": 0.3,
+      "end": 2.552,
+      "wav": "audio/voices/scene_01.wav",
+      "source": "estimated_silence"
+    },
+    {
+      "scene_id": 2,
+      "text": "작은의 중심에는 빛나는 존재가 있습니다.",
+      "start": 3.052,
+      "end": 5.0,
+      "wav": "audio/voices/scene_02.wav",
+      "source": "estimated_silence"
+    }
+  ],
+  "subtitles": [
+    {
+      "scene_id": 1,
+      "text": "모든 변화는 작은에서 시작됩니다.",
+      "start": 0.3,
+      "end": 2.552
+    },
+    {
+      "scene_id": 2,
+      "text": "작은의 중심에는 빛나는 존재가 있습니다.",
+      "start": 3.052,
+      "end": 5.0
+    }
+  ],
+  "sfx": [
+    {
+      "time": 0.323,
+      "type": "soft_impact",
+      "scene_id": 1,
+      "volume": 0.7,
+      "pan": 0.0
+    },
+    {
+      "time": 1.506,
+      "type": "shimmer",
+      "scene_id": 1,
+      "volume": 0.7,
+      "pan": 0.0
+    },
+    {
+      "time": 2.452,
+      "type": "whoosh_soft",
+      "scene_id": 1,
+      "volume": 0.4,
+      "pan": 0.0
+    },
+    {
+      "time": 3.314,
+      "type": "pop",
+      "scene_id": 2,
+      "volume": 0.7,
+      "pan": 0.0
+    },
+    {
+      "time": 4.101,
+      "type": "tick",
+      "scene_id": 2,
+      "volume": 0.7,
+      "pan": 0.0
+    }
+  ],
+  "music": {
+    "mood": "calm",
+    "ducking": true
+  }
+}

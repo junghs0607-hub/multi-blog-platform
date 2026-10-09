@@ -1,0 +1,6 @@
+# 렌더링 중간 산출물 (프레임 PNG 시퀀스)
+projects/*/frames/
+__pycache__/
+*.pyc
+logs/
+node_modules/

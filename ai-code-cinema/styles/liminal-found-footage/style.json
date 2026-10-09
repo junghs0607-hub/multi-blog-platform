@@ -1,0 +1,33 @@
+{
+  "id": "liminal-found-footage",
+  "name_en": "Liminal Found Footage",
+  "name_kr": "리미널 파운드푸티지",
+  "category": "film",
+  "palette": {
+    "bg": "#14161A",
+    "bg2": "#23262B",
+    "fg": "#C9C9C9",
+    "accent": "#8A9A5B",
+    "accent2": "#5B6E7A"
+  },
+  "background_rule": "텅 빈 복도·주차장",
+  "texture": "noise",
+  "line": "VHS 왜곡",
+  "lighting": "형광등",
+  "subject_rule": "텅 빈 공간",
+  "camera": "pan",
+  "step_fps": null,
+  "transition": "cut",
+  "transition_duration": 0.6,
+  "text_place": "bottom",
+  "sfx_profile": "deep",
+  "music_mood": "dark",
+  "forbidden": "밝은 색, 선명함, 안정감",
+  "renderer": "liminal_found_footage",
+  "params": {
+    "grain": 0.45,
+    "vignette": 0.55,
+    "tracking": true,
+    "timestamp": true
+  }
+}

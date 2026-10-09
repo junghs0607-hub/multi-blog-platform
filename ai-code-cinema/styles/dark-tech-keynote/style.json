@@ -1,0 +1,31 @@
+{
+  "id": "dark-tech-keynote",
+  "name_en": "Dark Tech Keynote",
+  "name_kr": "다크 테크 키노트",
+  "category": "info",
+  "palette": {
+    "bg": "#050507",
+    "bg2": "#0E0E14",
+    "fg": "#F5F5F7",
+    "accent": "#2997FF",
+    "accent2": "#A855F7"
+  },
+  "background_rule": "순흑 무대",
+  "texture": "none",
+  "line": "미니멀",
+  "lighting": "스포트라이트",
+  "subject_rule": "발광 제품",
+  "camera": "push_in",
+  "step_fps": null,
+  "transition": "fade",
+  "transition_duration": 0.6,
+  "text_place": "in-scene",
+  "sfx_profile": "deep",
+  "music_mood": "epic",
+  "forbidden": "밝은 배경, 장식, 손그림",
+  "renderer": "dark_tech_keynote",
+  "params": {
+    "glow": 0.7,
+    "vignette": 0.5
+  }
+}

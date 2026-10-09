@@ -1,0 +1,31 @@
+{
+  "id": "red-paper-cut",
+  "name_en": "Red Paper-cut",
+  "name_kr": "붉은 종이 오리기",
+  "category": "east-asian",
+  "palette": {
+    "bg": "#F5EDDC",
+    "bg2": "#E3D3B3",
+    "fg": "#B81F1F",
+    "accent": "#8C1414",
+    "accent2": "#D9A441"
+  },
+  "background_rule": "미색 한지 배경",
+  "texture": "paper",
+  "line": "오려낸 종이 가장자리",
+  "lighting": "플랫 + 종이 그림자",
+  "subject_rule": "붉은 대칭 문양",
+  "camera": "push_in",
+  "step_fps": null,
+  "transition": "fade",
+  "transition_duration": 0.6,
+  "text_place": "bottom",
+  "sfx_profile": "soft",
+  "music_mood": "calm",
+  "forbidden": "그라데이션, 3D 음영, 사진",
+  "renderer": "red_paper_cut",
+  "params": {
+    "symmetry": true,
+    "grain": 0.15
+  }
+}

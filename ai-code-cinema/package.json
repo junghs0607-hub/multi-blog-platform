@@ -1,0 +1,13 @@
+{
+  "name": "ai-code-cinema",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI Code Cinema - 코드 기반 자동 영상 제작 시스템 (웹 렌더러 캡처용)",
+  "type": "module",
+  "scripts": {
+    "capture": "node web/capture.mjs"
+  },
+  "dependencies": {
+    "playwright": "^1.49.0"
+  }
+}

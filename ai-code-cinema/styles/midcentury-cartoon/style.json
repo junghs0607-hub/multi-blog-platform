@@ -1,0 +1,30 @@
+{
+  "id": "midcentury-cartoon",
+  "name_en": "Mid-century Cartoon",
+  "name_kr": "미드센추리 교육 만화",
+  "category": "cartoon",
+  "palette": {
+    "bg": "#F0E6D2",
+    "bg2": "#D9C9A0",
+    "fg": "#3A3A3A",
+    "accent": "#C8553D",
+    "accent2": "#5A7D5A"
+  },
+  "background_rule": "종이 배경",
+  "texture": "paper",
+  "line": "기하학적 단순선",
+  "lighting": "플랫",
+  "subject_rule": "기하학적 인물",
+  "camera": "pan",
+  "step_fps": 12,
+  "transition": "wipe",
+  "transition_duration": 0.6,
+  "text_place": "bottom",
+  "sfx_profile": "pop",
+  "music_mood": "playful",
+  "forbidden": "그라데이션, 사실적, 네온",
+  "renderer": "midcentury_cartoon",
+  "params": {
+    "grain": 0.3
+  }
+}
