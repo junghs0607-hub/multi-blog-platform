@@ -2,12 +2,12 @@
 
 import React from "react";
 import { AppLayout } from "@/components/layout/AppLayout";
-import { AdminPortalView } from "@/components/admin/AdminPortalView";
+import { AssetCompareTool } from "@/components/compare/AssetCompareTool";
 
-export default function AdminPage() {
+export default function ComparePage() {
   return (
     <AppLayout>
-      <AdminPortalView />
+      <AssetCompareTool />
     </AppLayout>
   );
 }
