@@ -1,0 +1,31 @@
+{
+  "id": "ukiyo-e",
+  "name_en": "Ukiyo-e",
+  "name_kr": "우키요에 목판화",
+  "category": "east-asian",
+  "palette": {
+    "bg": "#EFE6D5",
+    "bg2": "#D9C9A8",
+    "fg": "#1F1F1F",
+    "accent": "#B5342C",
+    "accent2": "#2C5D8A"
+  },
+  "background_rule": "화지 질감 배경",
+  "texture": "woodgrain",
+  "line": "굵은 먹선",
+  "lighting": "플랫",
+  "subject_rule": "파도·후지산·인물",
+  "camera": "pan",
+  "step_fps": null,
+  "transition": "wipe",
+  "transition_duration": 0.6,
+  "text_place": "in-scene",
+  "sfx_profile": "soft",
+  "music_mood": "calm",
+  "forbidden": "그라데이션 음영, 사진, 서양 원근",
+  "renderer": "ukiyo_e",
+  "params": {
+    "grain": 0.25,
+    "bands": true
+  }
+}

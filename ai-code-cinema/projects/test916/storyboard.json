@@ -1,0 +1,81 @@
+{
+  "topic": "픽셀 용사의 모험",
+  "style": "pixel-rpg-16bit",
+  "duration": 5.0,
+  "message": "픽셀의 여정을 통해 변화와 희망을 전한다.",
+  "protagonist": "landscape",
+  "keywords": [
+    "픽셀",
+    "용사의",
+    "모험"
+  ],
+  "scenes": [
+    {
+      "scene_id": 1,
+      "act": "hook",
+      "title": "막이 오르다",
+      "start": 0.0,
+      "end": 2.128,
+      "duration": 2.128,
+      "purpose": "시청자의 관심 유도",
+      "visual": {
+        "background": "픽셀 필드 배경",
+        "subject": "landscape",
+        "composition": "wide",
+        "action": "orbiting",
+        "camera": "push_in",
+        "camera_from": {
+          "x": 0.546,
+          "y": 0.524,
+          "zoom": 1.475
+        },
+        "camera_to": {
+          "x": 0.529,
+          "y": 0.524,
+          "zoom": 1.725
+        },
+        "animation": "landscape subject, orbiting motion"
+      },
+      "narration": {
+        "text": "지금부터 픽셀의 세계로 안내합니다."
+      },
+      "transition_out": {
+        "type": "cut",
+        "duration": 0.6
+      },
+      "music_energy": 0.55
+    },
+    {
+      "scene_id": 2,
+      "act": "build",
+      "title": "세계",
+      "start": 2.728,
+      "end": 5.0,
+      "duration": 2.272,
+      "purpose": "세계관과 주인공 소개",
+      "visual": {
+        "background": "픽셀 필드 배경",
+        "subject": "city",
+        "composition": "low_angle",
+        "action": "drift",
+        "camera": "pan",
+        "camera_from": {
+          "x": 0.468,
+          "y": 0.505,
+          "zoom": 0.84
+        },
+        "camera_to": {
+          "x": 0.545,
+          "y": 0.505,
+          "zoom": 0.96
+        },
+        "animation": "city subject, drift motion"
+      },
+      "narration": {
+        "text": "픽셀를 이루는 조각들이 하나씩 모입니다."
+      },
+      "transition_out": null,
+      "music_energy": 0.65
+    }
+  ]
+}

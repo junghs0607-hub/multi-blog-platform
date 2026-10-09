@@ -1,0 +1,31 @@
+{
+  "id": "one-line-drawing",
+  "name_en": "One-line Drawing",
+  "name_kr": "한 줄 그림",
+  "category": "hand",
+  "palette": {
+    "bg": "#FAF7F0",
+    "bg2": "#EFEAE0",
+    "fg": "#111111",
+    "accent": "#111111",
+    "accent2": "#C0B8A8"
+  },
+  "background_rule": "미니멀 크림 배경",
+  "texture": "none",
+  "line": "끊기지 않는 한 줄",
+  "lighting": "플랫",
+  "subject_rule": "한 붓 그리기 피사체",
+  "camera": "pan",
+  "step_fps": null,
+  "transition": "fade",
+  "transition_duration": 0.6,
+  "text_place": "bottom",
+  "sfx_profile": "minimal",
+  "music_mood": "calm",
+  "forbidden": "채우기, 그림자, 여러 색상",
+  "renderer": "one_line_drawing",
+  "params": {
+    "draw_on": true,
+    "grain": 0.05
+  }
+}

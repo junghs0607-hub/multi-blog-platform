@@ -1,0 +1,20 @@
+{
+  "topic": "작은 신호에서 시작되는 변화",
+  "duration": 5.0,
+  "aspect": "16:9",
+  "resolution": "1280x720",
+  "fps": 24,
+  "style": "watercolor-brush",
+  "language": "ko",
+  "voice": "auto",
+  "music_mood": "calm",
+  "subtitles": true,
+  "sfx": true,
+  "storyboard_preview": true,
+  "engine": "python",
+  "video_codec": "libx264",
+  "audio_codec": "aac",
+  "output_format": "mp4",
+  "loudness_lufs": -14,
+  "seed": 20261009
+}

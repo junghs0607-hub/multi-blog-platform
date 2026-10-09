@@ -1,0 +1,31 @@
+{
+  "id": "risograph-print",
+  "name_en": "Risograph Print",
+  "name_kr": "리소그래프 인쇄",
+  "category": "print",
+  "palette": {
+    "bg": "#F4F1EA",
+    "bg2": "#E5DCC8",
+    "fg": "#222222",
+    "accent": "#FF48B0",
+    "accent2": "#0078BF"
+  },
+  "background_rule": "재생지 배경",
+  "texture": "riso",
+  "line": "거친 인쇄 가장자리",
+  "lighting": "플랫 + 오등록",
+  "subject_rule": "2~3도 분판 그래픽",
+  "camera": "pan",
+  "step_fps": null,
+  "transition": "cut",
+  "transition_duration": 0.6,
+  "text_place": "in-scene",
+  "sfx_profile": "pop",
+  "music_mood": "playful",
+  "forbidden": "풀컬러 사진, 부드러운 그라데이션",
+  "renderer": "risograph_print",
+  "params": {
+    "misregister": 4.0,
+    "grain": 0.45
+  }
+}

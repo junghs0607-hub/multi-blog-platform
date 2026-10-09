@@ -1,0 +1,31 @@
+{
+  "id": "tilt-shift-miniature",
+  "name_en": "Tilt-Shift Miniature",
+  "name_kr": "틸트시프트 미니어처",
+  "category": "material",
+  "palette": {
+    "bg": "#87B5D6",
+    "bg2": "#5A8AB0",
+    "fg": "#F5F5F5",
+    "accent": "#E8A020",
+    "accent2": "#3E5C50"
+  },
+  "background_rule": "미니어처 도시",
+  "texture": "miniature",
+  "line": "얕은 피사계",
+  "lighting": "밝은 낮",
+  "subject_rule": "미니어처 마을",
+  "camera": "pan",
+  "step_fps": null,
+  "transition": "fade",
+  "transition_duration": 0.6,
+  "text_place": "bottom",
+  "sfx_profile": "soft",
+  "music_mood": "bright",
+  "forbidden": "어두운 톤, 강한 대비, 노이즈",
+  "renderer": "tilt_shift_miniature",
+  "params": {
+    "tilt_blur": 0.8,
+    "saturation": 1.3
+  }
+}

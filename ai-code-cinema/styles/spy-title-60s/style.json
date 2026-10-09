@@ -1,0 +1,31 @@
+{
+  "id": "spy-title-60s",
+  "name_en": "60s Spy Title Sequence",
+  "name_kr": "1960년대 첩보 타이틀",
+  "category": "graphic",
+  "palette": {
+    "bg": "#0D0D0D",
+    "bg2": "#1A1A2E",
+    "fg": "#F5F5F5",
+    "accent": "#E8B820",
+    "accent2": "#B5342C"
+  },
+  "background_rule": "어두운 실루엣 배경",
+  "texture": "grain",
+  "line": "굵은 그래픽",
+  "lighting": "스포트라이트",
+  "subject_rule": "실루엣·타깃·총구",
+  "camera": "push_in",
+  "step_fps": null,
+  "transition": "iris",
+  "transition_duration": 0.6,
+  "text_place": "in-scene",
+  "sfx_profile": "retro",
+  "music_mood": "dark",
+  "forbidden": "파스텔, 얇은 선, 밝은 배경",
+  "renderer": "spy_title_60s",
+  "params": {
+    "grain": 0.5,
+    "vignette": 0.7
+  }
+}

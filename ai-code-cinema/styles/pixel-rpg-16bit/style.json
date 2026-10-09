@@ -1,0 +1,30 @@
+{
+  "id": "pixel-rpg-16bit",
+  "name_en": "16-bit Pixel RPG",
+  "name_kr": "16비트 픽셀 RPG",
+  "category": "game",
+  "palette": {
+    "bg": "#0F380F",
+    "bg2": "#306230",
+    "fg": "#9BBC0F",
+    "accent": "#8BAC0F",
+    "accent2": "#306230"
+  },
+  "background_rule": "픽셀 필드 배경",
+  "texture": "pixel",
+  "line": "픽셀 계단",
+  "lighting": "플랫",
+  "subject_rule": "픽셀 캐릭터·타일",
+  "camera": "pan",
+  "step_fps": 8,
+  "transition": "cut",
+  "transition_duration": 0.6,
+  "text_place": "in-scene",
+  "sfx_profile": "retro",
+  "music_mood": "playful",
+  "forbidden": "부드러운 곡선, 그라데이션, 고해상도",
+  "renderer": "pixel_rpg_16bit",
+  "params": {
+    "pixel": 4
+  }
+}

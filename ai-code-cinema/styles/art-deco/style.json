@@ -1,0 +1,31 @@
+{
+  "id": "art-deco",
+  "name_en": "Art Deco",
+  "name_kr": "아르데코",
+  "category": "graphic",
+  "palette": {
+    "bg": "#0E1A1F",
+    "bg2": "#1E3A3A",
+    "fg": "#E8C76A",
+    "accent": "#C9A227",
+    "accent2": "#7FB3A3"
+  },
+  "background_rule": "어두운 대칭 배경",
+  "texture": "gold",
+  "line": "대칭 기하 장식",
+  "lighting": "금속 광택",
+  "subject_rule": "대칭 장식 모티프",
+  "camera": "push_in",
+  "step_fps": null,
+  "transition": "fade",
+  "transition_duration": 0.6,
+  "text_place": "in-scene",
+  "sfx_profile": "chime",
+  "music_mood": "epic",
+  "forbidden": "난잡한 비대칭, 원색, 손그림",
+  "renderer": "art_deco",
+  "params": {
+    "symmetry": true,
+    "glow": 0.3
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "id": "halftone-dossier",
+  "name_en": "Halftone Dossier",
+  "name_kr": "복고풍 하프톤 인쇄",
+  "category": "print",
+  "palette": {
+    "bg": "#E8DCC0",
+    "bg2": "#C9B78C",
+    "fg": "#2A2118",
+    "accent": "#9C2B1B",
+    "accent2": "#3E5C50"
+  },
+  "background_rule": "오래된 서류 배경",
+  "texture": "halftone",
+  "line": "잉크 번짐",
+  "lighting": "빈티지 플랫",
+  "subject_rule": "하프톤 인물·사물",
+  "camera": "push_in",
+  "step_fps": null,
+  "transition": "wipe",
+  "transition_duration": 0.6,
+  "text_place": "bottom",
+  "sfx_profile": "retro",
+  "music_mood": "dark",
+  "forbidden": "선명한 디지털, 네온, 광택",
+  "renderer": "halftone_dossier",
+  "params": {
+    "halftone": 6,
+    "grain": 0.4,
+    "sepia": 0.5
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "id": "ascii-crt-terminal",
+  "name_en": "ASCII / CRT Terminal",
+  "name_kr": "ASCII CRT 터미널",
+  "category": "graphic",
+  "palette": {
+    "bg": "#0A0F0A",
+    "bg2": "#050805",
+    "fg": "#33FF66",
+    "accent": "#33FF66",
+    "accent2": "#FFB000"
+  },
+  "background_rule": "검은 CRT 화면",
+  "texture": "scanline",
+  "line": "문자 셀",
+  "lighting": "형광 발광",
+  "subject_rule": "ASCII 아트 장면",
+  "camera": "pan",
+  "step_fps": 10,
+  "transition": "cut",
+  "transition_duration": 0.6,
+  "text_place": "in-scene",
+  "sfx_profile": "retro",
+  "music_mood": "dark",
+  "forbidden": "부드러운 곡선, 사진, 파스텔",
+  "renderer": "ascii_crt_terminal",
+  "params": {
+    "scanlines": true,
+    "glow": 0.4,
+    "flicker": 0.1
+  }
+}

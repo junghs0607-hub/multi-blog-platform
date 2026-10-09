@@ -1,0 +1,31 @@
+{
+  "id": "silkscreen-travel-poster",
+  "name_en": "Silkscreen Travel Poster",
+  "name_kr": "실크스크린 여행 포스터",
+  "category": "print",
+  "palette": {
+    "bg": "#F5EDD8",
+    "bg2": "#E0D0A8",
+    "fg": "#1F3A4D",
+    "accent": "#E4572E",
+    "accent2": "#2E86AB"
+  },
+  "background_rule": "포스터 지면",
+  "texture": "screen",
+  "line": "깨끗한 면 분할",
+  "lighting": "플랫",
+  "subject_rule": "여행지 풍경 포스터",
+  "camera": "pan",
+  "step_fps": null,
+  "transition": "wipe",
+  "transition_duration": 0.6,
+  "text_place": "in-scene",
+  "sfx_profile": "pop",
+  "music_mood": "bright",
+  "forbidden": "사진 질감, 어두운 톤, 복잡한 디테일",
+  "renderer": "silkscreen_travel_poster",
+  "params": {
+    "bands": true,
+    "grain": 0.2
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "id": "game-show-flat",
+  "name_en": "Game Show Flat",
+  "name_kr": "게임쇼 플랫 그래픽",
+  "category": "game",
+  "palette": {
+    "bg": "#1B2A6B",
+    "bg2": "#2E4BA8",
+    "fg": "#FFFFFF",
+    "accent": "#FFD23F",
+    "accent2": "#FF4D6D"
+  },
+  "background_rule": "무대 배경",
+  "texture": "none",
+  "line": "굵은 플랫",
+  "lighting": "스포트라이트",
+  "subject_rule": "패널·점수판",
+  "camera": "pan",
+  "step_fps": null,
+  "transition": "wipe",
+  "transition_duration": 0.6,
+  "text_place": "in-scene",
+  "sfx_profile": "pop",
+  "music_mood": "bright",
+  "forbidden": "어두운 톤, 질감, 세밀",
+  "renderer": "game_show_flat",
+  "params": {
+    "confetti": true
+  }
+}

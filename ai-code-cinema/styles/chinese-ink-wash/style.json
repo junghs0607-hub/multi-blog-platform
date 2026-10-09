@@ -1,0 +1,31 @@
+{
+  "id": "chinese-ink-wash",
+  "name_en": "Chinese Ink Wash",
+  "name_kr": "중국 수묵화",
+  "category": "hand",
+  "palette": {
+    "bg": "#F2EDE3",
+    "bg2": "#D8CFBB",
+    "fg": "#1A1A1A",
+    "accent": "#8C1D18",
+    "accent2": "#5A5A5A"
+  },
+  "background_rule": "여백이 많은宣纸(선지) 배경",
+  "texture": "ink",
+  "line": "농담 있는 붓터치",
+  "lighting": "명암 대비의 여백 미학",
+  "subject_rule": "수묵 산수·달·학",
+  "camera": "pan",
+  "step_fps": null,
+  "transition": "fade",
+  "transition_duration": 0.6,
+  "text_place": "in-scene",
+  "sfx_profile": "soft",
+  "music_mood": "calm",
+  "forbidden": "원색 채움, 서양 원근법, 장식 테두리",
+  "renderer": "chinese_ink_wash",
+  "params": {
+    "ink": 0.7,
+    "grain": 0.2
+  }
+}

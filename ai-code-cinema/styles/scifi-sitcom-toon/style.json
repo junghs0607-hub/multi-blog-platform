@@ -1,0 +1,30 @@
+{
+  "id": "scifi-sitcom-toon",
+  "name_en": "Sci-Fi Sitcom Toon",
+  "name_kr": "SF 시트콤 툰",
+  "category": "cartoon",
+  "palette": {
+    "bg": "#2B1B4D",
+    "bg2": "#4D2B6B",
+    "fg": "#FFF3D6",
+    "accent": "#FFD23F",
+    "accent2": "#3FE0A0"
+  },
+  "background_rule": "우주 거실 배경",
+  "texture": "none",
+  "line": "굵은 카툰선",
+  "lighting": "밝은 스튜디오",
+  "subject_rule": "외계인 가족",
+  "camera": "pan",
+  "step_fps": 12,
+  "transition": "cut",
+  "transition_duration": 0.6,
+  "text_place": "bottom",
+  "sfx_profile": "pop",
+  "music_mood": "playful",
+  "forbidden": "사실적, 어두운 톤, 세밀",
+  "renderer": "scifi_sitcom_toon",
+  "params": {
+    "grain": 0.05
+  }
+}

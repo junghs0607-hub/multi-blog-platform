@@ -1,0 +1,31 @@
+{
+  "id": "stained-glass",
+  "name_en": "Stained Glass",
+  "name_kr": "스테인드글라스",
+  "category": "graphic",
+  "palette": {
+    "bg": "#101418",
+    "bg2": "#1C2B33",
+    "fg": "#F5E9D0",
+    "accent": "#2E86AB",
+    "accent2": "#B5342C"
+  },
+  "background_rule": "어두운 납골격",
+  "texture": "glass",
+  "line": "두꺼운 납선",
+  "lighting": "투과광",
+  "subject_rule": "색유리 모자이크",
+  "camera": "push_in",
+  "step_fps": null,
+  "transition": "fade",
+  "transition_duration": 0.6,
+  "text_place": "bottom",
+  "sfx_profile": "chime",
+  "music_mood": "epic",
+  "forbidden": "부드러운 그라데이션, 사진, 얇은 선",
+  "renderer": "stained_glass",
+  "params": {
+    "mosaic": true,
+    "glow": 0.5
+  }
+}

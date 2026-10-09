@@ -1,0 +1,18 @@
+[
+  {
+    "scene_id": 1,
+    "text": "지금부터 픽셀의 세계로 안내합니다.",
+    "start": 0.3,
+    "end": 2.528,
+    "wav": "audio/voices/scene_01.wav",
+    "source": "estimated_silence"
+  },
+  {
+    "scene_id": 2,
+    "text": "픽셀를 이루는 조각들이 하나씩 모입니다.",
+    "start": 3.028,
+    "end": 5.0,
+    "wav": "audio/voices/scene_02.wav",
+    "source": "estimated_silence"
+  }
+]

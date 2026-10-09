@@ -1,0 +1,50 @@
+[
+  {
+    "scene_id": 1,
+    "text": "모든 변화는 작은에서 시작됩니다.",
+    "start": 0.3,
+    "end": 4.7,
+    "wav": "audio/voices/scene_01.wav",
+    "source": "estimated_silence"
+  },
+  {
+    "scene_id": 2,
+    "text": "작은의 중심에는 빛나는 존재가 있습니다.",
+    "start": 5.248,
+    "end": 9.891,
+    "wav": "audio/voices/scene_02.wav",
+    "source": "estimated_silence"
+  },
+  {
+    "scene_id": 3,
+    "text": "작은를 이루는 조각들이 하나씩 모입니다.",
+    "start": 10.391,
+    "end": 14.935,
+    "wav": "audio/voices/scene_03.wav",
+    "source": "estimated_silence"
+  },
+  {
+    "scene_id": 4,
+    "text": "어둠 속에서 작은가 시험대에 오릅니다.",
+    "start": 15.435,
+    "end": 19.883,
+    "wav": "audio/voices/scene_04.wav",
+    "source": "estimated_silence"
+  },
+  {
+    "scene_id": 5,
+    "text": "작은의 질서가 흔들리기 시작합니다.",
+    "start": 20.383,
+    "end": 25.005,
+    "wav": "audio/voices/scene_05.wav",
+    "source": "estimated_silence"
+  },
+  {
+    "scene_id": 6,
+    "text": "마침내 작은는 새로운 빛을 찾습니다.",
+    "start": 25.65,
+    "end": 30.0,
+    "wav": "audio/voices/scene_06.wav",
+    "source": "estimated_silence"
+  }
+]

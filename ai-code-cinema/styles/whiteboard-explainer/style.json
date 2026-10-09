@@ -1,0 +1,31 @@
+{
+  "id": "whiteboard-explainer",
+  "name_en": "Whiteboard Explainer",
+  "name_kr": "화이트보드 설명 영상",
+  "category": "hand",
+  "palette": {
+    "bg": "#FFFFFF",
+    "bg2": "#F0F0F0",
+    "fg": "#222222",
+    "accent": "#D62828",
+    "accent2": "#1D6FB8"
+  },
+  "background_rule": "깨끗한 화이트보드",
+  "texture": "none",
+  "line": "마커 손그림",
+  "lighting": "균일 조명",
+  "subject_rule": "그려지는 다이어그램",
+  "camera": "pan",
+  "step_fps": null,
+  "transition": "wipe",
+  "transition_duration": 0.6,
+  "text_place": "in-scene",
+  "sfx_profile": "marker",
+  "music_mood": "playful",
+  "forbidden": "사진 질감, 그라데이션, 어두운 배경",
+  "renderer": "whiteboard_explainer",
+  "params": {
+    "draw_on": true,
+    "hand": true
+  }
+}

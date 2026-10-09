@@ -1,0 +1,290 @@
+{
+  "duration": 30.0,
+  "fps": 24,
+  "scenes": [
+    {
+      "scene_id": 1,
+      "act": "hook",
+      "start": 0.0,
+      "end": 4.348,
+      "transition_out": {
+        "type": "dissolve",
+        "duration": 0.6
+      }
+    },
+    {
+      "scene_id": 2,
+      "act": "build",
+      "start": 4.948,
+      "end": 9.491,
+      "transition_out": {
+        "type": "dissolve",
+        "duration": 0.6
+      }
+    },
+    {
+      "scene_id": 3,
+      "act": "build",
+      "start": 10.091,
+      "end": 14.535,
+      "transition_out": {
+        "type": "dissolve",
+        "duration": 0.6
+      }
+    },
+    {
+      "scene_id": 4,
+      "act": "change",
+      "start": 15.135,
+      "end": 19.483,
+      "transition_out": {
+        "type": "dissolve",
+        "duration": 0.6
+      }
+    },
+    {
+      "scene_id": 5,
+      "act": "change",
+      "start": 20.083,
+      "end": 24.75,
+      "transition_out": {
+        "type": "dissolve",
+        "duration": 0.6
+      }
+    },
+    {
+      "scene_id": 6,
+      "act": "resolve",
+      "start": 25.35,
+      "end": 30.0,
+      "transition_out": null
+    }
+  ],
+  "narration": [
+    {
+      "scene_id": 1,
+      "text": "모든 변화는 작은에서 시작됩니다.",
+      "start": 0.3,
+      "end": 4.7,
+      "wav": "audio/voices/scene_01.wav",
+      "source": "estimated_silence"
+    },
+    {
+      "scene_id": 2,
+      "text": "작은의 중심에는 빛나는 존재가 있습니다.",
+      "start": 5.248,
+      "end": 9.891,
+      "wav": "audio/voices/scene_02.wav",
+      "source": "estimated_silence"
+    },
+    {
+      "scene_id": 3,
+      "text": "작은를 이루는 조각들이 하나씩 모입니다.",
+      "start": 10.391,
+      "end": 14.935,
+      "wav": "audio/voices/scene_03.wav",
+      "source": "estimated_silence"
+    },
+    {
+      "scene_id": 4,
+      "text": "어둠 속에서 작은가 시험대에 오릅니다.",
+      "start": 15.435,
+      "end": 19.883,
+      "wav": "audio/voices/scene_04.wav",
+      "source": "estimated_silence"
+    },
+    {
+      "scene_id": 5,
+      "text": "작은의 질서가 흔들리기 시작합니다.",
+      "start": 20.383,
+      "end": 25.005,
+      "wav": "audio/voices/scene_05.wav",
+      "source": "estimated_silence"
+    },
+    {
+      "scene_id": 6,
+      "text": "마침내 작은는 새로운 빛을 찾습니다.",
+      "start": 25.65,
+      "end": 30.0,
+      "wav": "audio/voices/scene_06.wav",
+      "source": "estimated_silence"
+    }
+  ],
+  "subtitles": [
+    {
+      "scene_id": 1,
+      "text": "모든 변화는 작은에서 시작됩니다.",
+      "start": 0.3,
+      "end": 4.7
+    },
+    {
+      "scene_id": 2,
+      "text": "작은의 중심에는 빛나는 존재가 있습니다.",
+      "start": 5.248,
+      "end": 9.891
+    },
+    {
+      "scene_id": 3,
+      "text": "작은를 이루는 조각들이 하나씩 모입니다.",
+      "start": 10.391,
+      "end": 14.935
+    },
+    {
+      "scene_id": 4,
+      "text": "어둠 속에서 작은가 시험대에 오릅니다.",
+      "start": 15.435,
+      "end": 19.883
+    },
+    {
+      "scene_id": 5,
+      "text": "작은의 질서가 흔들리기 시작합니다.",
+      "start": 20.383,
+      "end": 25.005
+    },
+    {
+      "scene_id": 6,
+      "text": "마침내 작은는 새로운 빛을 찾습니다.",
+      "start": 25.65,
+      "end": 30.0
+    }
+  ],
+  "sfx": [
+    {
+      "time": 0.652,
+      "type": "soft_impact",
+      "scene_id": 1,
+      "volume": 0.7,
+      "pan": 0.0
+    },
+    {
+      "time": 3.044,
+      "type": "shimmer",
+      "scene_id": 1,
+      "volume": 0.7,
+      "pan": 0.0
+    },
+    {
+      "time": 4.648,
+      "type": "whoosh_soft",
+      "scene_id": 1,
+      "volume": 0.4,
+      "pan": 0.0
+    },
+    {
+      "time": 6.084,
+      "type": "pop",
+      "scene_id": 2,
+      "volume": 0.7,
+      "pan": 0.0
+    },
+    {
+      "time": 7.674,
+      "type": "tick",
+      "scene_id": 2,
+      "volume": 0.7,
+      "pan": 0.0
+    },
+    {
+      "time": 9.791,
+      "type": "whoosh_soft",
+      "scene_id": 2,
+      "volume": 0.4,
+      "pan": 0.0
+    },
+    {
+      "time": 11.202,
+      "type": "pop",
+      "scene_id": 3,
+      "volume": 0.7,
+      "pan": 0.0
+    },
+    {
+      "time": 12.757,
+      "type": "tick",
+      "scene_id": 3,
+      "volume": 0.7,
+      "pan": 0.0
+    },
+    {
+      "time": 14.835,
+      "type": "whoosh_soft",
+      "scene_id": 3,
+      "volume": 0.4,
+      "pan": 0.0
+    },
+    {
+      "time": 15.57,
+      "type": "whoosh",
+      "scene_id": 4,
+      "volume": 0.7,
+      "pan": 0.0
+    },
+    {
+      "time": 17.309,
+      "type": "thud",
+      "scene_id": 4,
+      "volume": 0.7,
+      "pan": 0.0
+    },
+    {
+      "time": 18.831,
+      "type": "riser",
+      "scene_id": 4,
+      "volume": 0.7,
+      "pan": 0.0
+    },
+    {
+      "time": 19.783,
+      "type": "whoosh_soft",
+      "scene_id": 4,
+      "volume": 0.4,
+      "pan": 0.0
+    },
+    {
+      "time": 20.55,
+      "type": "whoosh",
+      "scene_id": 5,
+      "volume": 0.7,
+      "pan": 0.0
+    },
+    {
+      "time": 22.416,
+      "type": "thud",
+      "scene_id": 5,
+      "volume": 0.7,
+      "pan": 0.0
+    },
+    {
+      "time": 24.05,
+      "type": "riser",
+      "scene_id": 5,
+      "volume": 0.7,
+      "pan": 0.0
+    },
+    {
+      "time": 25.05,
+      "type": "whoosh_soft",
+      "scene_id": 5,
+      "volume": 0.4,
+      "pan": 0.0
+    },
+    {
+      "time": 26.28,
+      "type": "chime",
+      "scene_id": 6,
+      "volume": 0.7,
+      "pan": 0.0
+    },
+    {
+      "time": 28.605,
+      "type": "soft_impact",
+      "scene_id": 6,
+      "volume": 0.7,
+      "pan": 0.0
+    }
+  ],
+  "music": {
+    "mood": "calm",
+    "ducking": true
+  }
+}

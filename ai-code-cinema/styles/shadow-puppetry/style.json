@@ -1,0 +1,31 @@
+{
+  "id": "shadow-puppetry",
+  "name_en": "Shadow Puppetry",
+  "name_kr": "그림자 인형극",
+  "category": "east-asian",
+  "palette": {
+    "bg": "#1A0E05",
+    "bg2": "#3D1F0D",
+    "fg": "#F5DFA8",
+    "accent": "#E8963C",
+    "accent2": "#7A2E1D"
+  },
+  "background_rule": "뒷조명 스크린",
+  "texture": "cloth",
+  "line": "실루엣 윤곽",
+  "lighting": "강한 백라이트",
+  "subject_rule": "관절 인형 실루엣",
+  "camera": "push_in",
+  "step_fps": 12,
+  "transition": "fade",
+  "transition_duration": 0.6,
+  "text_place": "bottom",
+  "sfx_profile": "deep",
+  "music_mood": "dark",
+  "forbidden": "밝은 전경, 세밀 묘사, 원색",
+  "renderer": "shadow_puppetry",
+  "params": {
+    "grain": 0.35,
+    "flicker": 0.15
+  }
+}

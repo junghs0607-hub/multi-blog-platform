@@ -1,0 +1,30 @@
+{
+  "id": "isometric-infographic",
+  "name_en": "Isometric Infographic",
+  "name_kr": "아이소메트릭 인포그래픽",
+  "category": "info",
+  "palette": {
+    "bg": "#F2F5F7",
+    "bg2": "#DDE6EC",
+    "fg": "#2B3A42",
+    "accent": "#2E86AB",
+    "accent2": "#E8A020"
+  },
+  "background_rule": "밝은 배경",
+  "texture": "none",
+  "line": "깨끗한 아이소메트릭",
+  "lighting": "소프트 섀도우",
+  "subject_rule": "아이소 블록·차트",
+  "camera": "orbit",
+  "step_fps": null,
+  "transition": "wipe",
+  "transition_duration": 0.6,
+  "text_place": "bottom",
+  "sfx_profile": "pop",
+  "music_mood": "bright",
+  "forbidden": "사진, 어두운 배경, 손그림",
+  "renderer": "isometric_infographic",
+  "params": {
+    "iso": true
+  }
+}

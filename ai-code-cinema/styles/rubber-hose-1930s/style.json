@@ -1,0 +1,32 @@
+{
+  "id": "rubber-hose-1930s",
+  "name_en": "1930s Rubber Hose Cartoon",
+  "name_kr": "1930년대 러버호스 만화",
+  "category": "cartoon",
+  "palette": {
+    "bg": "#E8E0CC",
+    "bg2": "#CFC39F",
+    "fg": "#1A1A1A",
+    "accent": "#1A1A1A",
+    "accent2": "#8A8A8A"
+  },
+  "background_rule": "낡은 필름 배경",
+  "texture": "grain",
+  "line": "고무호스 곡선",
+  "lighting": "플랫",
+  "subject_rule": "흑백 만화 캐릭터",
+  "camera": "pan",
+  "step_fps": 12,
+  "transition": "iris",
+  "transition_duration": 0.6,
+  "text_place": "in-scene",
+  "sfx_profile": "retro",
+  "music_mood": "playful",
+  "forbidden": "컬러, 날카로운 직선, CG 광택",
+  "renderer": "rubber_hose_1930s",
+  "params": {
+    "grain": 0.5,
+    "vignette": 0.5,
+    "flicker": 0.12
+  }
+}

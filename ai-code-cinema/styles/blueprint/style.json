@@ -1,0 +1,31 @@
+{
+  "id": "blueprint",
+  "name_en": "Blueprint",
+  "name_kr": "청사진 기술 도면",
+  "category": "graphic",
+  "palette": {
+    "bg": "#0B3D91",
+    "bg2": "#0A2A5E",
+    "fg": "#FFFFFF",
+    "accent": "#7FD4FF",
+    "accent2": "#FFFFFF"
+  },
+  "background_rule": "푸른 도면지",
+  "texture": "grid",
+  "line": "얇은 흰색 제도선",
+  "lighting": "플랫",
+  "subject_rule": "기술 도면·치수선",
+  "camera": "pan",
+  "step_fps": null,
+  "transition": "wipe",
+  "transition_duration": 0.6,
+  "text_place": "in-scene",
+  "sfx_profile": "click",
+  "music_mood": "minimal",
+  "forbidden": "채우기 색, 사진, 장식",
+  "renderer": "blueprint",
+  "params": {
+    "grid": true,
+    "draw_on": true
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "id": "scifi-hologram-hud",
+  "name_en": "Sci-fi Hologram HUD",
+  "name_kr": "SF 홀로그램 HUD",
+  "category": "info",
+  "palette": {
+    "bg": "#020A12",
+    "bg2": "#062033",
+    "fg": "#7FD4FF",
+    "accent": "#00E5FF",
+    "accent2": "#FF4D6D"
+  },
+  "background_rule": "어두운 공간",
+  "texture": "scanline",
+  "line": "얇은 홀로그램선",
+  "lighting": "홀로 발광",
+  "subject_rule": "HUD·홀로그램 지구",
+  "camera": "orbit",
+  "step_fps": null,
+  "transition": "fade",
+  "transition_duration": 0.6,
+  "text_place": "in-scene",
+  "sfx_profile": "retro",
+  "music_mood": "dark",
+  "forbidden": "따뜻한 색, 종이 질감, 손그림",
+  "renderer": "scifi_hologram_hud",
+  "params": {
+    "scanlines": true,
+    "glow": 0.6,
+    "flicker": 0.08
+  }
+}

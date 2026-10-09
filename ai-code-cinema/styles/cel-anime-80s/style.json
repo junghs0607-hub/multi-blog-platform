@@ -1,0 +1,31 @@
+{
+  "id": "cel-anime-80s",
+  "name_en": "80s Cel Anime",
+  "name_kr": "1980년대 셀 애니메이션",
+  "category": "cartoon",
+  "palette": {
+    "bg": "#1B2A4A",
+    "bg2": "#3A5A8C",
+    "fg": "#F5E9D0",
+    "accent": "#FF4D6D",
+    "accent2": "#4FD4FF"
+  },
+  "background_rule": "석양 그라데이션 하늘",
+  "texture": "cel",
+  "line": "셀 음영",
+  "lighting": "석양 역광",
+  "subject_rule": "셀 캐릭터·메카",
+  "camera": "push_in",
+  "step_fps": 12,
+  "transition": "wipe",
+  "transition_duration": 0.6,
+  "text_place": "bottom",
+  "sfx_profile": "retro",
+  "music_mood": "epic",
+  "forbidden": "3D 렌더, 파스텔, 미니멀",
+  "renderer": "cel_anime_80s",
+  "params": {
+    "cel_bands": 3,
+    "grain": 0.25
+  }
+}
