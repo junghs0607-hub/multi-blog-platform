@@ -1,0 +1,54 @@
+{
+  "name": "mosaic",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mosaic — Pinterest 스타일 이미지 큐레이션 플랫폼 (Next.js + PostgreSQL + Drizzle ORM)",
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx scripts/migrate.ts",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
+    "db:seed": "tsx scripts/seed.ts",
+    "db:reset": "tsx scripts/seed.ts --reset",
+    "setup": "npm run db:migrate && npm run db:seed",
+    "worker": "tsx scripts/worker.ts",
+    "admin:create": "tsx scripts/create-admin.ts"
+  },
+  "dependencies": {
+    "@fontsource-variable/noto-sans-kr": "5.3.1",
+    "@next/env": "16.4.0",
+    "aws4fetch": "1.0.20",
+    "clsx": "2.1.1",
+    "drizzle-orm": "0.45.4",
+    "lucide-react": "1.55.0",
+    "next": "16.4.0",
+    "pg": "8.23.1",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "sharp": "0.35.5",
+    "tailwind-merge": "3.7.0",
+    "tsx": "4.23.15",
+    "zod": "4.6.6"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.3.3",
+    "@types/node": "22.19.15",
+    "@types/pg": "8.18.0",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "drizzle-kit": "0.31.11",
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.4.0",
+    "postcss": "8.5.29",
+    "tailwindcss": "4.3.3",
+    "typescript": "5.9.3"
+  }
+}
