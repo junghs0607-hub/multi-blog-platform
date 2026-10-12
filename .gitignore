@@ -20,7 +20,8 @@ next-env.d.ts
 credentials.json
 
 # 로컬 이미지 저장소 (업로드 원본/썸네일)
-storage/
+# 앞의 / 로 루트의 storage/ 만 무시합니다. (없으면 src/server/storage/ 소스까지 무시됨)
+/storage/
 
 # logs
 *.log
