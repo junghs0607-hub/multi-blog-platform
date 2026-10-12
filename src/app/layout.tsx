@@ -1,43 +1,36 @@
 import type { Metadata, Viewport } from "next";
-import type { ReactNode } from "react";
+import { Header } from "@/components/layout/header";
+import { MobileNav } from "@/components/layout/mobile-nav";
+import { Providers } from "@/components/providers";
+import { getSessionUser } from "@/server/auth/session";
+import { env } from "@/server/env";
+import "@fontsource-variable/noto-sans-kr";
 import "./globals.css";
-import { AssetProvider } from "@/context/AssetContext";
 
 export const metadata: Metadata = {
-  title: "DOMINO X - 통합 자산관리 & 배당 플랫폼",
-  description:
-    "국내주식, 해외주식, ETF, 커버드콜, 가상자산, 부동산, 채권, 외화, 금/원자재를 하나의 화면에서 통합 관리하는 프리미엄 자산관리 서비스",
-  keywords: [
-    "도미노",
-    "자산관리",
-    "배당주",
-    "커버드콜",
-    "미국주식",
-    "국내주식",
-    "가상자산",
-    "부동산",
-    "포트폴리오",
-    "김치프리미엄",
-  ],
+  metadataBase: new URL(env.APP_URL),
+  title: { default: "Mosaic — 영감을 모으는 이미지 큐레이션", template: "%s | Mosaic" },
+  description: "마음에 드는 이미지를 발견하고, 보드에 모으고, 공유하세요. Mosaic 이미지 큐레이션 플랫폼",
+  icons: { icon: "/favicon.svg" },
+  openGraph: { siteName: "Mosaic", type: "website", locale: "ko_KR" },
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
+  themeColor: "#ffffff",
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const user = await getSessionUser();
   return (
-    <html lang="ko" className="dark">
-      <head>
-        <link
-          rel="icon"
-          href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>"
-        />
-      </head>
-      <body className="bg-slate-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 antialiased min-h-screen">
-        <AssetProvider>{children}</AssetProvider>
+    <html lang="ko">
+      <body>
+        <Providers initialUser={user}>
+          <Header />
+          <main className="min-h-[calc(100dvh-5rem)] pb-24 md:pb-10">{children}</main>
+          <MobileNav />
+        </Providers>
       </body>
     </html>
   );

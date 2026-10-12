@@ -1,185 +1,120 @@
-# 📊 DOMINO X - 웹 기반 올인원 통합 자산관리 플랫폼
+# Mosaic — 이미지 큐레이션 플랫폼
 
-> 📁 **이 저장소의 다른 프로젝트**: [`mosaic/`](./mosaic) — Pinterest 스타일 이미지 큐레이션 플랫폼 (Next.js + PostgreSQL + Drizzle ORM).
-> 설치·실행 방법은 [mosaic/README.md](./mosaic/README.md)를 참고하세요.
+Pinterest 스타일의 이미지 큐레이션 웹 서비스입니다. 이미지를 업로드해 **핀**을 만들고, **보드**에 모으고, 검색·좋아요·댓글·팔로우로 영감을 공유합니다.
+모든 기능은 실제 PostgreSQL 데이터베이스와 REST API(CRUD)로 동작합니다.
 
-주식 투자관리 앱 「도미노(Domino)」 스타일의 **웹 기반 통합 자산관리 서비스**입니다.  
-국내주식, 해외주식, ETF, 커버드콜, 가상자산, 부동산, 채권, 펀드, 현금, 외화, 금/원자재를 하나의 대시보드와 포트폴리오에서 통합 관리하고 실시간 현금흐름과 배당 스노우볼을 시뮬레이션할 수 있습니다.
+| 영역 | 기술 |
+| --- | --- |
+| 프론트엔드 | Next.js 16 (App Router, React 19), Tailwind CSS 4, lucide-react |
+| 백엔드 | Next.js Route Handlers (REST API), zod 검증 |
+| 데이터베이스 | PostgreSQL 14+ (권장 17), Drizzle ORM / drizzle-kit 마이그레이션 |
+| 이미지 처리 | sharp (libvips) — 검증, 원본 정제, 중간/썸네일 WebP 생성, 지각 해시 |
+| 스토리지 | 로컬 디스크(기본) 또는 S3 호환 객체 스토리지 (AWS S3, MinIO, Cloudflare R2 등) |
 
----
+## 주요 기능
 
-## 🛠️ 개발 환경 및 셋팅 방법 (Getting Started)
+| # | 기능 | 구현 내용 |
+| --- | --- | --- |
+| 1 | 회원 | 회원가입·로그인·로그아웃, 프로필 편집, 프로필 사진, 비밀번호 변경, 회원 탈퇴 (DB 세션 + scrypt) |
+| 2 | 피드 | 반응형 Masonry 레이아웃, IntersectionObserver 무한 스크롤, 최신/인기/팔로잉 탭, 키셋 커서 페이지네이션 |
+| 3 | 업로드 | 드래그 앤 드롭, 제목·설명·태그·원본 URL·카테고리·공개 범위, 업로드 진행률 |
+| 4 | 상세 | 원본/중간 이미지, 색상 팔레트, 태그(사용자 + ✨AI), 관련 핀 추천 |
+| 5 | 보드 | 생성·수정·삭제, 공개/비공개, 커버 콜라주 |
+| 6 | 저장 | 한 핀을 여러 보드에 저장, 저장 취소, 저장 수 집계 |
+| 7 | 검색 | 제목·설명·태그 전문 검색(한글 부분 일치), `#태그` 검색, 카테고리 필터, 관련도/인기/최신 정렬, 자동완성, 색상으로 찾기 |
+| 8 | 소셜 | 좋아요, 댓글(수정·삭제), 공유(링크 복사·SNS·Web Share API) |
+| 9 | 팔로우·알림 | 팔로우/언팔로우, 팔로워/팔로잉 목록, 팔로잉 피드, 팔로우·좋아요·댓글·저장·운영 알림 |
+| 10 | 관리자 | 대시보드 통계, 사용자(권한/정지/삭제), 이미지(숨김/복구/삭제), 신고 처리, 감사 로그 |
+| 11 | 반응형 | 모바일 2열 ~ 데스크톱 7열, 모바일 하단 탭 바, 바텀 시트형 다이얼로그 |
+| 12 | 중복·검증 | SHA-256 정확 중복 차단, dHash 유사 이미지 경고, 매직 바이트 형식 검증, 크기·해상도 제한, EXIF 제거 |
 
-### 1. 사전 요구사항 (Prerequisites)
-* **Node.js**: v18.17.0 이상 (v20+ 권장)
-* **패키지 매니저**: `npm`, `pnpm`, 또는 `yarn`
+## 빠른 시작
 
----
+### 1. 요구 사항
+- Node.js **20.9 이상** (22 LTS 권장)
+- PostgreSQL **14 이상** (Docker 사용 시 자동)
 
-### 2. 설치 및 로컬 실행 (Installation)
+### 2. 설치 및 실행
 
 ```bash
-# 1. 저장소 클론 (특정 브랜치 클론 시)
-git clone -b arena/01a0f522-multi-blog-platform https://github.com/junghs0607-hub/multi-blog-platform.git domino-asset-manager
-cd domino-asset-manager
-
-# 2. 의존성 패키지 설치
 npm install
 
-# 3. 개발 서버 실행
+# PostgreSQL 실행 (Docker)
+docker compose up -d db
+
+# 환경 변수 (기본값만으로도 docker compose DB 에 연결됩니다)
+cp .env.example .env.local
+
+# 마이그레이션 + 데모 데이터 (사용자 6명, 핀 72개, 보드 13개 …)
+npm run db:migrate
+npm run db:seed
+
+# 개발 서버
 npm run dev
-
-# 4. 브라우저에서 확인
-# http://localhost:3000 접속
 ```
 
----
+브라우저에서 http://localhost:3000 을 엽니다.
 
-### 3. 프로덕션 빌드 및 배포 실행 (Production Build)
+| 데모 계정 | 아이디 / 이메일 | 비밀번호 |
+| --- | --- | --- |
+| 관리자 | `admin` / admin@mosaic.local | `admin1234` |
+| 일반 사용자 | `minji`, `junho`, `seoyeon`, `hyunwoo`, `jiwoo` (@mosaic.local) | `mosaic1234` |
+
+> Docker 없이 로컬 PostgreSQL 을 사용한다면 `DATABASE_URL` 만 바꿔주세요.
+> 예) `createdb mosaic && DATABASE_URL=postgres://<user>:<password>@localhost:5432/mosaic`
+
+### 3. 프로덕션 실행
 
 ```bash
-# 1. 프로덕션 빌드
 npm run build
+npm run start            # 기본 3000 포트
 
-# 2. 프로덕션 서버 실행
-npm start
+# 또는 Docker 로 앱까지 실행
+docker compose --profile app up -d --build
 ```
 
----
+S3 호환 스토리지(MinIO)를 쓰려면 `docker compose --profile s3 up -d` 후 `.env.local` 에서 `STORAGE_DRIVER=s3` 로 변경하세요.
 
-### 4. 새로운 GitHub 저장소로 이전하는 방법 (New Repository Setup)
+## npm 스크립트
 
-새로운 본인 계정의 저장소(예: `domino-asset-manager`)로 코드를 업로드하려면 아래 명령어를 실행하세요:
+| 스크립트 | 설명 |
+| --- | --- |
+| `npm run dev` | 개발 서버 (Turbopack) |
+| `npm run build` / `npm start` | 프로덕션 빌드 / 실행 |
+| `npm run lint` / `npm run typecheck` | ESLint / TypeScript 검사 |
+| `npm run db:generate` | 스키마 변경 → SQL 마이그레이션 생성 (`drizzle/`) |
+| `npm run db:migrate` | 마이그레이션 적용 |
+| `npm run db:seed` | 데모 데이터 생성 (빈 DB 에서만) |
+| `npm run db:reset` | 모든 데이터·로컬 이미지 삭제 후 데모 데이터 재생성 |
+| `npm run db:studio` | Drizzle Studio (DB 브라우저) |
+| `npm run worker` | 백그라운드 작업 워커 (`JOB_MODE=worker` 일 때) |
+| `npm run admin:create -- <아이디>` | 기존 사용자를 관리자로 승격 (또는 `--email --username --password` 로 생성) |
 
-```bash
-# 1. 새 저장소 URL로 원격지(remote) 변경
-git remote set-url origin https://github.com/YOUR_GITHUB_USERNAME/YOUR_NEW_REPO_NAME.git
+## 환경 변수
 
-# 2. 기본 브랜치를 main으로 설정
-git branch -M main
+전체 목록과 설명은 [`.env.example`](./.env.example) 을 참고하세요. 주요 항목:
 
-# 3. 새 저장소로 푸시
-git push -u origin main --force
-```
+| 변수 | 기본값 | 설명 |
+| --- | --- | --- |
+| `DATABASE_URL` | `postgres://mosaic:mosaic@localhost:5432/mosaic` | PostgreSQL 접속 URL |
+| `STORAGE_DRIVER` | `local` | `local` 또는 `s3` |
+| `LOCAL_STORAGE_DIR` | `./storage` | 로컬 이미지 저장 경로 |
+| `S3_*` | – | 버킷/리전/엔드포인트/키, `S3_PUBLIC_URL`(CDN) |
+| `UPLOAD_MAX_MB` | `10` | 업로드 최대 크기 |
+| `DUPLICATE_PHASH_THRESHOLD` | `6` | 유사 이미지 판정 해밍 거리 (0~11, 7 이하 재현율 100% 탐색) |
+| `ADMIN_EMAILS` | – | 이 이메일로 가입 시 관리자 권한 부여 |
+| `JOB_MODE` | `inline` | `inline`(응답 후 즉시 실행) / `worker`(별도 워커) |
+| `AI_ANALYZERS` | `basic` | 활성화할 이미지 분석기 |
 
----
+## 문서
 
-### 5. Vercel 원클릭 클라우드 배포 (Vercel Deployment)
+- [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md) — 전체 프로젝트 구조, 계층 설계, 업로드 파이프라인, 권한 모델, 성능, AI 확장 설계
+- [docs/DATABASE.md](./docs/DATABASE.md) — ERD, 테이블 정의, 인덱스 전략
+- [docs/API.md](./docs/API.md) — REST API 명세 (요청/응답/에러 코드)
 
-1. [Vercel](https://vercel.com/)에 로그인하고 **Add New Project**를 선택합니다.
-2. 생성한 GitHub 저장소를 연결합니다.
-3. **Framework Preset**으로 `Next.js`를 선택하고 **Deploy** 버튼을 클릭하면 1분 안에 배포가 완료됩니다.
+## 검증 현황
 
----
-
-## ✨ 핵심 기능 안내
-
-### 1. 전체 자산 대시보드 (`/`)
-* **통합 순자산 (Net Worth)**: 총자산 - 부채(주담대/임대보증금) = 실질 순자산 실시간 계산
-* **프라이버시 모드**: 헤더의 눈 아이콘 클릭 시 모든 금액 `•••••• 원` 마스킹
-* **다각도 자산배분 차트**: 자산군별, 국가별, 통화별, 위험도별, 배당/성장형 비중 인터랙티브 도넛 차트
-* **순자산 성장 추이 타임라인**: 1W, 1M, 3M, 6M, 1Y, ALL 기간별 순자산 vs 투자원금 비교 곡선
-
-### 2. 11개 자산군 세부 관리 (`/assets/...`)
-* **국내주식 (`/assets/kr-stock`)**: KOSPI/KOSDAQ 실시간 시세, PER/PBR/EPS/ROE, 52주 고저, 분기 배당금
-* **해외주식 (`/assets/us-stock`)**: USD/KRW 원화 및 달러 동시 표기, 환율 영향 및 환차익 분해
-* **ETF & 커버드콜 (`/assets/etf`)**: JEPI, JEPQ, TSLY 등 고배당 커버드콜 별도 태깅, 월분배금 일정
-* **가상자산 (`/assets/crypto`)**: BTC, ETH, SOL, XRP 24시간 시세, **실시간 김치 프리미엄 계산기**, 거래소별 자산 및 거래소 간 이동 기록, PoS 스테이킹 보상 관리
-* **부동산 (`/assets/real-estate`)**: 아파트, 오피스텔, 빌라, 상가 실거래가, 주택담보대출, 임대보증금 및 월세 순현금흐름 계산, 실질 순자산(Equity)
-* **펀드 / 채권 (`/assets/funds-bonds`)**: 국채 10년, 회사채 확정 이자 스케줄, TDF 펀드
-* **현금 / 외화 (`/assets/cash-fx`)**: 원화, 달러, 엔화, 유로 환율 및 환차익 관리
-* **금 / 원자재 (`/assets/gold-commodities`)**: KRX 금현물(1g), 은, WTI 원유 선물
-
-### 3. 배당 및 분배금 허브 (`/dividends`)
-* 연간 및 월평균 예상 배당금 자동 집계
-* 1월 ~ 12월 인터랙티브 월별 배당 캘린더 (입금 예정 종목 및 금액)
-* 배당 재투자 복리 스노우볼 시뮬레이터 (10년 후 미래 자산 및 월 배당금 예측)
-
-### 4. 통합 거래내역 원장 (`/transactions`)
-* 매수, 매도, 배당금, ETF 분배금, 채권 이자, 부동산 월세, 거래소 자산이동, 환전 다중 필터 지원
-
-### 5. 포트폴리오 분석 & 리밸런싱 계산기 (`/portfolio`)
-* 목표 비중 슬라이더 조절 시 **자산군별 정확한 매수/매도 필요 금액(원화)** 자동 산출
-
-### 6. 종목 비교 분석실 (`/compare`)
-* 2~4개 종목 100% 기준 정규화 수익률 비교 차트 및 재무 지표 맞비교
-
-### 7. 성과 분석 & 현금흐름 & FIRE 플래너 (`/analytics`, `/cashflow`)
-* TWR(시간가중수익률), MWR(금액가중수익률), 월별 수익률 히트맵 그리드
-* FIRE 조기은퇴 게이지 및 경제적 자유 달성도 측정
-
-### 8. 세금 관리 & 절세 계산기 (`/taxes`)
-* 해외주식 양도소득세 (250만 공제 + 22%) 및 손실확정 절세 매매 시뮬레이션
-* 금융소득종합과세 2,000만원 모니터링 경고 게이지
-* 연금저축/IRP 세액공제 환급 계산기 (최대 900만원 한도)
-
-### 9. AI 포트폴리오 어드바이저 (`/ai-advisor`)
-* 포트폴리오 건전성 스코어 (0-100점), 실시간 대화형 AI 금융 챗봇
-
-### 10. 관심종목, 캘린더, 다중 계좌, 관리자 & 데이터 I/O
-* 실시간 스파크라인 시세판 (`/watchlist`)
-* 투자 & 경제 캘린더 (`/calendar`)
-* 다중 금융계좌 관리 (`/accounts`)
-* CSV 가져오기 & JSON 전체 백업 및 원클릭 복원 (`/data-io`)
-* 관리자 포털 (`/admin`)
-
----
-
-## 📂 프로젝트 폴더 구조
-
-```
-├── public/                 # 정적 리소스
-├── src/
-│   ├── app/                # Next.js App Router 페이지 및 API 라우트
-│   │   ├── accounts/       # 다중 투자계좌 관리
-│   │   ├── admin/          # 관리자 포털
-│   │   ├── ai-advisor/     # AI 자산진단 & 챗봇
-│   │   ├── alerts/         # 가격 & 조건 알림
-│   │   ├── analytics/      # 수익률 & 성과 심층 분석
-│   │   ├── assets/         # 자산군별 상세 페이지 (국내/해외주식, ETF, 코인, 부동산 등)
-│   │   ├── calendar/       # 투자 & 경제 캘린더
-│   │   ├── cashflow/       # 현금흐름 & FIRE 플래너
-│   │   ├── compare/        # 종목 비교 분석실
-│   │   ├── data-io/        # CSV 가져오기 / JSON 백업
-│   │   ├── dividends/      # 배당 & 분배금 캘린더
-│   │   ├── market/         # 글로벌 시장 지수
-│   │   ├── portfolio/      # 포트폴리오 분석 & 리밸런싱
-│   │   ├── taxes/          # 세금 관리 & 절세 시뮬레이터
-│   │   ├── transactions/   # 통합 거래내역 원장
-│   │   ├── watchlist/      # 관심종목 시세판
-│   │   ├── page.tsx        # 메인 대시보드
-│   │   ├── layout.tsx      # 루트 레이아웃 & 테마 설정
-│   │   └── globals.css     # Tailwind CSS 전역 스타일
-│   ├── components/         # 모듈별 UI 컴포넌트 & 모달
-│   │   ├── accounts/
-│   │   ├── admin/
-│   │   ├── ai/
-│   │   ├── alerts/
-│   │   ├── analytics/
-│   │   ├── assets/
-│   │   ├── calendar/
-│   │   ├── cashflow/
-│   │   ├── compare/
-│   │   ├── crypto/
-│   │   ├── dashboard/
-│   │   ├── data/
-│   │   ├── dividends/
-│   │   ├── layout/         # Header, Sidebar, MobileNav, AppLayout
-│   │   ├── modals/         # 자산추가, 거래입력, 자산상세 모달
-│   │   ├── portfolio/
-│   │   ├── realestate/
-│   │   ├── taxes/
-│   │   └── watchlist/
-│   ├── context/            # 전역 자산 상태 관리 (AssetContext)
-│   ├── lib/                # 모의 데이터 및 금융 계산 유틸리티
-│   └── types/              # TypeScript 도메인 타입 정의
-├── package.json
-├── tsconfig.json
-└── README.md
-```
-
----
-
-## 🛡️ 보안 및 데이터 보호
-* 본 프로젝트는 API 키나 비밀번호 등 민감 정보를 저장소에 커밋하지 않으며, 모든 로컬 데이터는 브라우저 LocalStorage에 안전하게 보관됩니다.
-* 필요 시 `/data-io` 메뉴에서 언제든지 전체 포트폴리오 데이터를 JSON으로 내보내기/복원하거나 CSV로 일괄 등록할 수 있습니다.
+- `npm run typecheck`, `npm run lint`(React Compiler 규칙 포함), `npm run build` 통과
+- 실제 PostgreSQL 17 + 로컬 스토리지 환경에서 API 통합 테스트 132개 시나리오 통과
+  (인증, 업로드 검증, 정확/유사 중복, 비공개 보드 접근 제어, 권한, 신고 처리, 계정 정지, 탈퇴 시 정리, 카운터 정합성 등)
+- 헤드리스 브라우저로 로그인 → 업로드 → 상세 → 좋아요 → 댓글 → 보드 저장 UI 흐름 검증

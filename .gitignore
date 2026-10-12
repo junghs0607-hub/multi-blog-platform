@@ -1,44 +1,32 @@
-# Dependencies
+# dependencies
 node_modules/
-.pnp
-.pnp.js
 
-# Production & Build
+# next.js
 .next/
 out/
-dist/
 build/
+next-env.d.ts
+*.tsbuildinfo
 
-# Sensitive Configs & Credentials
-.env*
+# env (예시 파일만 커밋)
+.env
+.env.*
 !.env.example
-*.config.json
-drizzle.config.*
+
+# 인증서·자격 증명
 *.pem
 *.key
 *.cert
 credentials.json
 
-# Process IDs, Scripts & Logs
-*.pid
-*.sh
+# 로컬 이미지 저장소 (업로드 원본/썸네일)
+# 앞의 / 로 루트의 storage/ 만 무시합니다. (없으면 src/server/storage/ 소스까지 무시됨)
+/storage/
+
+# logs
 *.log
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
 
-# Uploads & Temporary Media
-uploads/
-public/uploads/
-browser-profiles/
-*.publish-temp/
-
-# Archives
-*.zip
-*.tar.gz
-*.rar
-
-# OS Metadata
+# OS
 .DS_Store
 Thumbs.db

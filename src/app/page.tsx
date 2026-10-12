@@ -1,115 +1,79 @@
-"use client";
+import Link from "next/link";
+import { buildHref, ChipLinks, TabLinks } from "@/components/layout/chips";
+import { PinFeed } from "@/components/pins/pin-feed";
+import { buttonClass } from "@/components/ui/button";
+import { withQuery } from "@/lib/api";
+import { getViewer } from "@/server/auth/session";
+import { listCategories } from "@/server/services/categories";
 
-import React, { useState } from "react";
-import { AppLayout } from "@/components/layout/AppLayout";
-import { TotalAssetCard } from "@/components/dashboard/TotalAssetCard";
-import { AssetAllocationChart } from "@/components/dashboard/AssetAllocationChart";
-import { AssetTimelineChart } from "@/components/dashboard/AssetTimelineChart";
-import { AssetClassGrid } from "@/components/dashboard/AssetClassGrid";
-import { TopMoversAndHoldings } from "@/components/dashboard/TopMoversAndHoldings";
-import { DividendPreviewWidget } from "@/components/dashboard/DividendPreviewWidget";
-import { KimchiPremiumWidget } from "@/components/dashboard/KimchiPremiumWidget";
-import { AssetTable } from "@/components/assets/AssetTable";
-import { AssetDetailModal } from "@/components/modals/AssetDetailModal";
-import { AddAssetModal } from "@/components/modals/AddAssetModal";
-import { TradeModal } from "@/components/modals/TradeModal";
-import { AssetItem, AssetCategory } from "@/types/asset";
+type SP = Promise<Record<string, string | string[] | undefined>>;
 
-export default function HomePage() {
-  const [selectedAsset, setSelectedAsset] = useState<AssetItem | null>(null);
-  const [isAddAssetOpen, setIsAddAssetOpen] = useState(false);
-  const [isTradeModalOpen, setIsTradeModalOpen] = useState(false);
-  const [tradeAssetId, setTradeAssetId] = useState<string | undefined>(undefined);
+export default async function HomePage({ searchParams }: { searchParams: SP }) {
+  const sp = await searchParams;
+  const [viewer, categories] = await Promise.all([getViewer(), listCategories()]);
 
-  const handleOpenTrade = (assetId?: string) => {
-    setTradeAssetId(assetId);
-    setIsTradeModalOpen(true);
-  };
+  const feed = sp.feed === "following" && viewer ? "following" : "all";
+  const sort = sp.sort === "popular" ? "popular" : "latest";
+  const category = typeof sp.category === "string" && categories.some((c) => c.slug === sp.category) ? sp.category : undefined;
+  const url = withQuery("/api/pins", { feed, sort, category });
+
+  const tabParams = (p: { feed?: string; sort?: string }) => ({ category, ...p });
 
   return (
-    <AppLayout>
-      <div className="space-y-6 sm:space-y-8 animate-fade-in">
-        {/* Hero Section: Net Worth & Total Assets */}
-        <TotalAssetCard
-          onOpenAddAsset={() => setIsAddAssetOpen(true)}
-          onOpenTradeModal={() => handleOpenTrade()}
+    <div className="px-2 md:px-4">
+      {!viewer && (
+        <section className="mx-auto mb-6 max-w-4xl rounded-[32px] bg-gradient-to-br from-rose-50 via-amber-50 to-sky-50 px-6 py-10 text-center md:py-14">
+          <h1 className="text-3xl font-bold tracking-tight md:text-5xl">다음 영감을 찾아보세요</h1>
+          <p className="mx-auto mt-3 max-w-xl text-neutral-600 md:text-lg">
+            인테리어, 레시피, 여행지까지. 마음에 드는 이미지를 발견하고 나만의 보드에 모아보세요.
+          </p>
+          <div className="mt-6 flex justify-center gap-2">
+            <Link href="/signup" className={buttonClass("primary", "lg")}>
+              무료로 가입하기
+            </Link>
+            <Link href="/login" className={buttonClass("secondary", "lg")}>
+              로그인
+            </Link>
+          </div>
+        </section>
+      )}
+
+      <div className="sticky top-16 z-30 -mx-2 mb-3 bg-white/95 px-2 pt-1 pb-2 backdrop-blur md:top-20 md:-mx-4 md:px-4">
+        <TabLinks
+          className="mb-2"
+          items={[
+            { href: buildHref("/", tabParams({})), label: "최신", active: feed === "all" && sort === "latest" },
+            { href: buildHref("/", tabParams({ sort: "popular" })), label: "인기", active: feed === "all" && sort === "popular" },
+            ...(viewer
+              ? [{ href: buildHref("/", tabParams({ feed: "following" })), label: "팔로잉", active: feed === "following" }]
+              : []),
+          ]}
         />
-
-        {/* 2-Column Interactive Visual Charts */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <AssetAllocationChart />
-          <AssetTimelineChart />
-        </div>
-
-        {/* 11 Asset Classes Overview Grid */}
-        <AssetClassGrid onSelectAsset={() => setIsAddAssetOpen(true)} />
-
-        {/* 2-Column Widgets: Top Holdings & Dividend Stream */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <TopMoversAndHoldings onSelectAsset={(a) => setSelectedAsset(a)} />
-          <DividendPreviewWidget />
-        </div>
-
-        {/* 2-Column Widgets: Kimchi Premium & Quick Action */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <KimchiPremiumWidget />
-          <div className="bg-gradient-to-br from-indigo-900 via-slate-900 to-blue-950 rounded-3xl p-6 text-white shadow-sm border border-indigo-900/50 flex flex-col justify-between">
-            <div>
-              <div className="text-xs font-bold text-indigo-400 uppercase tracking-wider">
-                DOMINO X 스마트 자산 팁
-              </div>
-              <h3 className="text-lg font-black mt-1">
-                월 370만원 패시브 인컴 파이프라인 운용 중
-              </h3>
-              <p className="text-xs text-gray-300 mt-2 leading-relaxed">
-                현재 부동산 월세(180만), SCHD/JEPI 미국 배당(140만), 국내 ISA 월배당(40만), 이더리움 스테이킹(10만)으로 안정적인 현금흐름이 구축되어 있습니다.
-              </p>
-            </div>
-            <div className="pt-4 mt-4 border-t border-white/10 flex items-center justify-between text-xs">
-              <span className="text-gray-400">배당 재투자 복리 효과</span>
-              <span className="font-bold text-emerald-400">10년 후 월 850만원 예상</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Integrated Asset Ledger Table */}
-        <div className="space-y-3">
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="text-base font-extrabold text-gray-900 dark:text-white">
-                보유 자산 전체 목록
-              </h2>
-              <p className="text-xs text-gray-400 mt-0.5">
-                모든 금융 및 실물 자산 실시간 시세와 손익 현황
-              </p>
-            </div>
-          </div>
-          <AssetTable
-            onSelectAsset={(a) => setSelectedAsset(a)}
-            onOpenAddAsset={() => setIsAddAssetOpen(true)}
-            onOpenTrade={(id) => handleOpenTrade(id)}
-          />
-        </div>
+        <ChipLinks
+          items={[
+            { href: buildHref("/", { feed: feed === "following" ? feed : undefined, sort: sort === "popular" ? sort : undefined }), label: "전체", active: !category },
+            ...categories.map((c) => ({
+              href: buildHref("/", { feed: feed === "following" ? feed : undefined, sort: sort === "popular" ? sort : undefined, category: c.slug }),
+              label: c.name,
+              active: category === c.slug,
+            })),
+          ]}
+        />
       </div>
 
-      {/* Modals */}
-      <AssetDetailModal
-        asset={selectedAsset}
-        isOpen={selectedAsset !== null}
-        onClose={() => setSelectedAsset(null)}
-        onOpenTrade={(id) => handleOpenTrade(id)}
+      <PinFeed
+        key={url}
+        url={url}
+        emptyTitle={feed === "following" ? "팔로잉 피드가 비어 있어요" : "아직 핀이 없어요"}
+        emptyDescription={feed === "following" ? "관심 있는 사용자를 팔로우하면 새 핀이 이곳에 표시돼요." : "첫 번째 핀을 올려보세요!"}
+        emptyAction={
+          viewer ? (
+            <Link href={feed === "following" ? "/search" : "/create"} className={buttonClass("primary")}>
+              {feed === "following" ? "사용자 찾아보기" : "핀 만들기"}
+            </Link>
+          ) : undefined
+        }
       />
-
-      <AddAssetModal
-        isOpen={isAddAssetOpen}
-        onClose={() => setIsAddAssetOpen(false)}
-      />
-
-      <TradeModal
-        isOpen={isTradeModalOpen}
-        onClose={() => setIsTradeModalOpen(false)}
-        defaultAssetId={tradeAssetId}
-      />
-    </AppLayout>
+    </div>
   );
 }
