@@ -3,7 +3,7 @@
 ## 1. 전체 프로젝트 구조
 
 ```
-mosaic/
+multi-blog-platform/
 ├── .env.example               # 환경 변수 예시 (cp .env.example .env.local)
 ├── docker-compose.yml         # PostgreSQL 17 / MinIO(S3) / 앱 컨테이너
 ├── Dockerfile                 # 프로덕션 이미지 (시작 시 마이그레이션 적용)

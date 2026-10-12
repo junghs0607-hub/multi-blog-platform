@@ -37,7 +37,6 @@ Pinterest 스타일의 이미지 큐레이션 웹 서비스입니다. 이미지�
 ### 2. 설치 및 실행
 
 ```bash
-cd mosaic
 npm install
 
 # PostgreSQL 실행 (Docker)

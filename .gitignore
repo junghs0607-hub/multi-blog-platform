@@ -13,9 +13,11 @@ next-env.d.ts
 .env.*
 !.env.example
 
-# 저장소 루트 .gitignore 의 패턴(drizzle.config.*, *.config.json)을 이 프로젝트에서는 다시 포함합니다.
-!drizzle.config.ts
-!drizzle/meta/*.json
+# 인증서·자격 증명
+*.pem
+*.key
+*.cert
+credentials.json
 
 # 로컬 이미지 저장소 (업로드 원본/썸네일)
 storage/
